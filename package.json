@@ -1,8 +1,7 @@
 {
-  "name": "restaurant-page",
+  "name": "todo-clone",
   "version": "1.0.0",
-  "description": "A restaurant webpage made for the Odin Project course on web development.",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack",
@@ -11,22 +10,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tacticalParmesan/restaurant-page.git"
+    "url": "git+https://github.com/tacticalParmesan/todo-clone.git"
   },
   "author": "Edoardo Ferreri",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tacticalParmesan/restaurant-page/issues"
+    "url": "https://github.com/tacticalParmesan/todo-clone/issues"
   },
-  "homepage": "https://github.com/tacticalParmesan/restaurant-page#readme",
-  "devDependencies": {
+  "homepage": "https://github.com/tacticalParmesan/todo-clone#readme",
+  "description": "",
+  "dependencies": {
+    "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.0",
-    "webpack": "^5.91.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
-  },
-  "dependencies": {
-    "css-loader": "^7.1.1",
-    "style-loader": "^4.0.0"
   }
 }

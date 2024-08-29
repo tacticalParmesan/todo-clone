@@ -13,7 +13,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Restaurant Page | Odin Project",
+            title: "Todo App | Odin Project",
             template: "./src/index.html"
         })
     ],
