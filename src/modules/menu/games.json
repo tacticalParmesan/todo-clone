@@ -1,0 +1,38 @@
+{
+    "consoleOne": {
+        "name": "NES Classic",
+        "info": "The console that singlehandedly save the games industry, home to Mario Bros and Legend of Zelda!",
+        "imgUrl": "https://images.unsplash.com/photo-1591634442506-2eba93c387ca?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "2/h"
+    },
+    "consoleTwo": {
+        "name": "PlayStation 1",
+        "info": "Fire up with Spyro the Dragon or crash at insane speeds with Crash Bandicot!",
+        "imgUrl": "https://images.unsplash.com/photo-1551152675-42e0fd1e7057?q=80&w=1419&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "2/h"
+    },
+    "consoleThree": {
+        "name": "GameCube",
+        "info": "Tame the terrible Dark Lugia, defeat Ganondorf in Wind Waker o blast your friends in Smash Bros! ",
+        "imgUrl": "https://images.unsplash.com/photo-1494666144702-70d86c6cf884?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "2/h"
+    },
+    "consoleFour": {
+        "name": "SNES Classic",
+        "info": "If the power of the NES isn't enough for you, wait not defending the Crystals in Final Fanatasy IV?",
+        "imgUrl": "https://images.unsplash.com/photo-1531594896955-305cf81269f1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "2/h"
+    },
+    "consoleFive": {
+        "name": "GameBoy",
+        "info": "Do you want to be the very best? Like no one ever was? Challenge your friends from the palm of your hand!",
+        "imgUrl": "https://images.unsplash.com/photo-1555864326-5cf22ef123cf?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "1/h"
+    },
+    "consoleSix": {
+        "name": "Arcades",
+        "info": "Why sitting at a table if you can fight invaders from Space or eat silly ghosts on these beauties?",
+        "imgUrl": "https://images.unsplash.com/photo-1498736297812-3a08021f206f?q=80&w=1179&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "cost": "1 token = 0.5"
+    }
+}
