@@ -3,8 +3,9 @@ import { Utils } from "../modules/utils.js";
 
 /**
  * A class representing a Todo item: stores all data related to the
- * todo including, tile, description, due date and priority. Has an
- * internal status field that control wheter the task is done or not.
+ * todo including uniquie ID, tile, description, due date and priority.
+ * Has a private status field that control wheter the task is done.
+ * It comes with methods for serializing and parsing itself from JSON.
  * @param title
  * @param description
  * @param dueDate
@@ -17,6 +18,8 @@ export default class Todo {
         this.dueDate = new Date(dueDate);
         this.priority = priority;
     }
+
+    #id = Utils.generateHexId();
 
     /** Checks wheter the task is done. */
     #done = false;
@@ -35,8 +38,7 @@ export default class Todo {
     }
 
     set description(value) {
-        if (Utils.isValidString("description", value))
-            this._description = value;
+        this._description = String(value);
     }
 
     get dueDate() {
@@ -56,11 +58,36 @@ export default class Todo {
         this._priority = typeof value === "number" ? value : this._priority;
     }
     //#endregion
-    
+
     //#region Instance Methods
     toggleStatus() {
-        this.#done = this.#done === true ? false : true
+        this.#done = this.#done === true ? false : true;
     }
 
+    /**
+     * Takes control of serialization process and makes sure that the saved
+     * todo can be reinstantiated smoothly while preserving the getter and
+     * setter architcture and private variables.
+     * @returns 
+     */
+    toJSON() {
+        return {
+            title: this._title,
+            description: this._description,
+            dueDate: this._dueDate,
+            priority: this._priority,
+            done: this.#done,
+        };
+    }
+
+    /** Static method to create a Todo instance from JSON once loaded from
+     * storage.
+     */
+    static fromJSON(json) {
+        const obj = JSON.parse(json);
+        const todo = new Todo(obj.title, obj.description, obj.dueDate, obj.priority);
+        todo.#done = obj.done;
+        return todo;
+    }
     //#endregion
 }

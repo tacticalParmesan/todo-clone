@@ -1,17 +1,11 @@
-import Project from "./components/project";
-import Todo from "./components/todo";
+import { endOfDay } from "date-fns";
+import { Logic } from "./modules/logic";
+import { Store } from "./modules/storage";
 
-const todo = new Todo(
-    "Awesome todo",
-    "I have to kiss my Gdf later",
-    new Date(),
-    1
-);
-console.log(todo);
-todo.toggleStatus();
-console.log(todo);
 
-const proj = new Project("todos", "many things to do")
-console.log(proj)
-proj.addToProject(todo)
-console.log(proj.getTodosList())
+const loaded = Store.loadProject("website")
+console.log(loaded)
+Logic.deleteTodo(loaded, loaded.getTodosList()[0])
+Logic.deleteTodo(loaded, loaded.getTodosList()[1])
+
+console.log(loaded)
