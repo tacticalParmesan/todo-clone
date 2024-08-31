@@ -62,7 +62,5 @@ export default class Todo {
         this.#done = this.#done === true ? false : true
     }
 
-
-
     //#endregion
 }
