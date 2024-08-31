@@ -33,7 +33,7 @@ export class Logic {
         if (project !== "general") {
             project.add(newTodo);
             console.info(
-                `Created todo '${newTodo.title}'. Added to project '${project}'`
+                `Created todo '${newTodo.title}'. Added to project '${project}.'`
             );
         } else {
         }
@@ -48,17 +48,35 @@ export class Logic {
      * @param {*} todo
      */
     static deleteTodo(project, todo) {
-        if (!project.hasTodo(todo)) { return }
+        if (!project.hasTodo(todo)) {
+            return;
+        }
         project.todos.splice(project.todos.indexOf(todo), 1);
         console.info(
             `Deleted todo '${todo.title}' from project '${project.name}'.`
         );
     }
 
+    /**
+     * Edits the passed property replacing its value with the given one.
+     * Check if the todo belongs to the project and if the property is
+     * one of the Todo type.
+     * @param {*} project
+     * @param {*} todo
+     * @param {*} property
+     * @param {*} value
+     * @returns
+     */
     static editTodo(project, todo, property, value) {
-        if (!project.hasTodo(todo)) { return }
-        const target = project.todos.find((item) => item === todo)
-        if (property in todo) target[property] = value
+        if (!project.hasTodo(todo)) {
+            return;
+        }
+        const target = project.todos.find((item) => item === todo);
+        const oldValue = target[property];
+        if (property in todo) target[property] = value;
+        console.info(
+            `Edited todo '${todo.title}' inside project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`
+        );
     }
 
     /**
@@ -69,16 +87,20 @@ export class Logic {
      * @returns
      */
     static createProject(name, description) {
-        if (!Store.doProjectExist()) {
+        if (!Store.doProjectExist(name)) {
             const newProject = new Project(name, description);
-            console.info(`Created project ${name}.`);
+            console.info(`Created project '${name}'.`);
             return newProject;
         } else {
-            console.error(`Project ${name} already exists in storage.`);
+            console.error(`Project '${name}' already exists in storage.`);
         }
     }
 
-    static deleteProject() {}
+    static deleteProject(name) {
+        if (!Store.doProjectExist(name)) { return }
+        Store.removeProject(name)
+        console.info(`Deleted project '${name}'.`)
+    }
 
     static editProject() {}
 }

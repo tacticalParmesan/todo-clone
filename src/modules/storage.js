@@ -38,6 +38,10 @@ export class Store {
         return Project.fromJSON(projectObject);
     }
 
+    static removeProject(projectName) {
+        localStorage.removeItem(projectName)
+    }
+
     /**
      * Look up function to check if a project already exists in storage.
      * @param {*} projectName
@@ -45,7 +49,7 @@ export class Store {
      */
     static doProjectExist(projectName) {
         const check = localStorage.getItem(projectName) ? true : false;
-        if (!check) console.error(`Project ${projectName} does not exist.`);
+        if (!check) console.info(`Project ${projectName} does not exist.`);
         return check
     }
 }
