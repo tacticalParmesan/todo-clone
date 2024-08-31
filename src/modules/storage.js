@@ -11,14 +11,14 @@ export class Store {
         return Storage.instance;
     }
     //#endregion
-    
+
     /**
      * Saves a project in localStorage using the localStorage API.
-     * @param {*} project 
+     * @param {*} project
      */
-    static saveProject(project){
+    static saveProject(project) {
         if (project instanceof Project) {
-            localStorage.setItem(project.name, JSON.stringify(project))
+            localStorage.setItem(project.name, JSON.stringify(project));
         }
     }
 
@@ -26,24 +26,26 @@ export class Store {
      * Loads a project by name from localStorage and parses its
      * data to return an instance of Project class with the stored
      * properties and values.
-     * @param {*} projectName 
+     * @param {*} projectName
      * @returns a Project instance
      */
-    static loadProject(projectName){
-        try{
-            const projectObject = localStorage.getItem(projectName)
-            return Project.fromJSON(projectObject)
-        } catch {
-            
+    static loadProject(projectName) {
+        if (!this.doProjectExist(projectName)) {
+            return;
         }
+
+        const projectObject = localStorage.getItem(projectName);
+        return Project.fromJSON(projectObject);
     }
 
     /**
      * Look up function to check if a project already exists in storage.
-     * @param {*} projectName 
-     * @returns 
+     * @param {*} projectName
+     * @returns
      */
     static doProjectExist(projectName) {
-        return (localStorage.getItem(projectName)) ? true : false
+        const check = localStorage.getItem(projectName) ? true : false;
+        if (!check) console.error(`Project ${projectName} does not exist.`);
+        return check
     }
 }
