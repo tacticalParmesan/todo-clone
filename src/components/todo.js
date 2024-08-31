@@ -1,12 +1,17 @@
 const { isDate, format } = require("date-fns");
+import { Utils } from "../modules/utils.js";
 
 /**
  * A class representing a Todo item: stores all data related to the
  * todo including, tile, description, due date and priority. Has an
  * internal status field that control wheter the task is done or not.
+ * @param title
+ * @param description
+ * @param dueDate
+ * @param priority
  */
 export default class Todo {
-    constructor({ title, description, dueDate, priority }) {
+    constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
         this.dueDate = new Date(dueDate);
@@ -16,13 +21,13 @@ export default class Todo {
     /** Checks wheter the task is done. */
     #done = false;
 
-    // #region Getters and Setters
+    //#region Getters and Setters
     get title() {
         return this._title;
     }
 
     set title(value) {
-        if (this.#isValidStringInput("title", value)) this._title = value;
+        if (Utils.isValidString("title", value)) this._title = value;
     }
 
     get description() {
@@ -30,7 +35,8 @@ export default class Todo {
     }
 
     set description(value) {
-        if (this.#isValidStringInput("description", value)) this._description = value
+        if (Utils.isValidString("description", value))
+            this._description = value;
     }
 
     get dueDate() {
@@ -50,20 +56,13 @@ export default class Todo {
         this._priority = typeof value === "number" ? value : this._priority;
     }
     //#endregion
-
-    /**
-     * Private method to check if the provided string value is
-     * a valid input for the property the user is editing.
-     * @param {*} field
-     * @param {*} value
-     */
-    #isValidStringInput(fieldName, value) {
-        if (/\S/.test(value) && typeof value === "string") {
-            return true;
-        } else {
-            throw new Error(
-                `Value "${value}" is not a valid input for field "${fieldName}".`
-            );
-        }
+    
+    //#region Instance Methods
+    toggleStatus() {
+        this.#done = this.#done === true ? false : true
     }
+
+
+
+    //#endregion
 }
