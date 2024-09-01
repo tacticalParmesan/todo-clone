@@ -42,16 +42,17 @@ export class Store {
 
     /**
      * Loads all todos from every project present in memory to let
-     * the user interact with collection of all tasks without having 
-     * to traverse all projects. 
+     * the user interact with collection of all tasks without having
+     * to traverse all projects.
      */
     static loadAllTodos() {
-        const allTodos = []
+        let allTodos = [];
         for (const project of Object.keys(localStorage)) {
-            const loadedProject = this.loadProject(project)
-            allTodos.concat(loadedProject.getTodosList())
+            const loadedProject = this.loadProject(project);
+            allTodos = [...loadedProject.getTodosList()];
         }
-        console.log(allTodos)
+        console.log(allTodos);
+        return allTodos;
     }
 
     /**

@@ -19,7 +19,7 @@ export class Logic {
      * constructor and checks if the Todo belongs to an existing
      * project, in that it pushes it in its collection.
      *
-     * @param {*} properties A map containing the Todo properties.
+     * @param {*} properties {title, description, dueDate, priority}
      * @param {*} project Defaults to 'general' for non categorized Todos.
      */
     static createTodo(todoProperties, project = "general") {
@@ -99,14 +99,44 @@ export class Logic {
     /**
      * Deletes the given project from storage. Delegates to
      * the Store component the effective removing from localStorage.
-     * @param {*} name 
-     * @returns 
+     * @param {*} name
+     * @returns
      */
     static deleteProject(name) {
-        if (!Store.doProjectExist(name)) { return }
-        Store.removeProject(name)
-        console.info(`Deleted project '${name}'.`)
+        if (!Store.doProjectExist(name)) {
+            return;
+        }
+        Store.removeProject(name);
+        console.info(`Deleted project '${name}'.`);
     }
 
-    static editProject() {}
+    /**
+     * Changes details about the given project by accessing its properties
+     * and calling the right setters. Checks if the property exists inside
+     * the given project.
+     * @param {*} project 
+     * @param {*} property 
+     * @param {*} value 
+     * @returns 
+     */
+    static editProject(project, property, value) {
+        if (Store.doProjectExist(project.name)) {
+            if (property !== "todos" && property in project) {
+                const oldValue = project[property];
+                project[property] = value;
+                console.info(
+                    `Edited project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`
+                );
+            } else {
+                console.error(
+                    `Cannot access property '${property}' of project '${project.name}'.`
+                );
+            }
+        } else {
+            console.error(
+                `Project '${project.name}' does not exist in storage.`
+            );
+            return;
+        }
+    }
 }

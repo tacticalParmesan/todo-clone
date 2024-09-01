@@ -1,11 +1,65 @@
+<!-- #region Boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App | Odin Project</title>
-<script defer src="runtime.js"></script><script defer src="main.js"></script></head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <title>Todo App | Odin Project</title>
+    <script defer src="runtime.js"></script><script defer src="main.js"></script></head>
+    <!-- #endregion -->
+    <body>
+        <!-- Main content area below. Divided between a sidebar and a content view. -->
+        <main class="app">
+            <!-- #region Sidebar -->
+            <nav id="sidebar">
+                <section class="sidebarPanel" id="userPanel">
+                    <p id="userCircle">EF</p>
+                    <p id="username">Username</p>
+                    <button id="foldButton">
+                        <span class="material-symbols-outlined">
+                            left_panel_close
+                        </span>
+                    </button>
+                </section>
+                <section class="sidebarPanel" id="mainPanel">
+                    <button>
+                        <span class="material-symbols-outlined"> add </span>
+                        <p>Add a task</p>
+                    </button>
+                    <div class="tab" id="inbox">
+                        <span class="material-symbols-outlined"> inbox </span>
+                        <p class="panelText">Inbox</p>
+                    </div>
+                    <div class="tab" id="today">
+                        <span class="material-symbols-outlined"> today </span>
+                        <p class="panelText">Today</p>
+                        <p class="panelText" id="todoNumber">N</p>
+                    </div>
+                    <div class="tab" id="upcoming">
+                        <span class="material-symbols-outlined">
+                            calendar_month
+                        </span>
+                        <p class="panelText">Inbox</p>
+                    </div>
+                </section>
+                <section class="sidebarPanel" id="projectPanel">
+                    <div id="projectHead">
+                        <p>Projects</p>
+                        <button id="addProject">
+                            <span class="material-symbols-outlined"> add </span>
+                        </button>
+                    </div>
+                    <ol id="projectList"></ol>
+                </section>
+            </nav>
+            <!-- #endregion -->
+            <!-- #region Content Area -->
+            <div id="content"></div>
+            <!-- #endregion -->
+        </main>
+    </body>
 </html>
