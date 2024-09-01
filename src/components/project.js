@@ -25,7 +25,7 @@ export default class Project {
     todos = [];
 
     /**
-     * Flag to check wheter the project is pending or complete.
+     * Flag to check whether the project is pending or complete.
      */
     complete = false;
 
@@ -74,7 +74,7 @@ export default class Project {
     toJSON() {
         return {
             name: this._name,
-            description: this.description,
+            description: this._description,
             todos: this.todos,
             complete: this.complete,
         };
@@ -87,7 +87,6 @@ export default class Project {
         const obj = JSON.parse(json);
         const project = new Project(obj.name, obj.description);
         obj.todos.forEach((todo) => {
-            console.log(todo);
             project.todos.push(Todo.fromJSON(JSON.stringify(todo)));
         });
         return project;

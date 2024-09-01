@@ -33,7 +33,7 @@ export class Logic {
         if (project !== "general") {
             project.add(newTodo);
             console.info(
-                `Created todo '${newTodo.title}'. Added to project '${project}.'`
+                `Created todo '${newTodo.title}'. Added to project '${project.name}'.`
             );
         } else {
         }
@@ -84,7 +84,7 @@ export class Logic {
      * if the project already exists in the storage.
      * @param {*} name
      * @param {*} description
-     * @returns
+     * @returns An instance of the new Project
      */
     static createProject(name, description) {
         if (!Store.doProjectExist(name)) {
@@ -96,6 +96,12 @@ export class Logic {
         }
     }
 
+    /**
+     * Deletes the given project from storage. Delegates to
+     * the Store component the effective removing from localStorage.
+     * @param {*} name 
+     * @returns 
+     */
     static deleteProject(name) {
         if (!Store.doProjectExist(name)) { return }
         Store.removeProject(name)

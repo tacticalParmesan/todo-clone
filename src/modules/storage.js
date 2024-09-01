@@ -16,9 +16,11 @@ export class Store {
      * Saves a project in localStorage using the localStorage API.
      * @param {*} project
      */
-    static saveProject(project) {
-        if (project instanceof Project) {
-            localStorage.setItem(project.name, JSON.stringify(project));
+    static saveProject(...projects) {
+        for (const project of projects) {
+            if (project instanceof Project) {
+                localStorage.setItem(project.name, JSON.stringify(project));
+            }
         }
     }
 
@@ -38,8 +40,26 @@ export class Store {
         return Project.fromJSON(projectObject);
     }
 
+    /**
+     * Loads all todos from every project present in memory to let
+     * the user interact with collection of all tasks without having 
+     * to traverse all projects. 
+     */
+    static loadAllTodos() {
+        const allTodos = []
+        for (const project of Object.keys(localStorage)) {
+            const loadedProject = this.loadProject(project)
+            allTodos.concat(loadedProject.getTodosList())
+        }
+        console.log(allTodos)
+    }
+
+    /**
+     * Uses localStorage API to remove a project.
+     * @param {*} projectName
+     */
     static removeProject(projectName) {
-        localStorage.removeItem(projectName)
+        localStorage.removeItem(projectName);
     }
 
     /**
@@ -50,6 +70,6 @@ export class Store {
     static doProjectExist(projectName) {
         const check = localStorage.getItem(projectName) ? true : false;
         if (!check) console.info(`Project ${projectName} does not exist.`);
-        return check
+        return check;
     }
 }
