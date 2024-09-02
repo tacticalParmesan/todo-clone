@@ -2,7 +2,6 @@
     background-color: blanchedalmond;
     width: 240px;
     padding: 0.5rem;
-    
 }
 
 #sidebar,
@@ -19,7 +18,7 @@
 #foldButton:hover,
 #addTodoButton:hover,
 #addProject:hover,
-.tab:hover{
+.tab:hover {
     cursor: pointer;
     background-color: rgb(253, 223, 178);
     border-radius: 0.5rem;
@@ -101,14 +100,13 @@
 
 /*#region Projects Panel */
 
-
 #projectHead {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#projectHead:hover{
+#projectHead:hover {
     cursor: default;
 }
 

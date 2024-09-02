@@ -6,7 +6,7 @@ export class Store {
     //#region Implementing singleton pattern
     static getInstance() {
         if (!Storage.instance) {
-            Storage.instance = new Logic();
+            Storage.instance = new Store();
         }
         return Storage.instance;
     }

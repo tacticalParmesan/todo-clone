@@ -17,20 +17,21 @@ export class Logic {
      * Creates a new Todo item with the data extracted from the
      * UI fields passed as an object. It also calls the Todo
      * constructor and checks if the Todo belongs to an existing
-     * project, in that it pushes it in its collection.
+     * project, in that case it pushes it in its collection.
      *
      * @param {*} properties {title, description, dueDate, priority}
      * @param {*} project Defaults to 'general' for non categorized Todos.
      */
-    static createTodo(todoProperties, project = "general") {
+    static createTodo(todoProperties, project) {
         const newTodo = new Todo(
             todoProperties.title,
             todoProperties.description,
             todoProperties.dueDate,
-            todoProperties.priority
+            todoProperties.priority,
+            todoProperties.projectName
         );
 
-        if (project !== "general") {
+        if (project.name !== "general") {
             project.add(newTodo);
             console.info(
                 `Created todo '${newTodo.title}'. Added to project '${project.name}'.`
@@ -114,10 +115,10 @@ export class Logic {
      * Changes details about the given project by accessing its properties
      * and calling the right setters. Checks if the property exists inside
      * the given project.
-     * @param {*} project 
-     * @param {*} property 
-     * @param {*} value 
-     * @returns 
+     * @param {*} project
+     * @param {*} property
+     * @param {*} value
+     * @returns
      */
     static editProject(project, property, value) {
         if (Store.doProjectExist(project.name)) {

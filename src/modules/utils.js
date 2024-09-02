@@ -40,4 +40,17 @@ export class Utils {
         }
         return hex;
     }
+
+    /**
+     * Sets the input text to Title Case.
+     * @param {*} text
+     * @returns
+     */
+    static toTitleCase(text) {
+        return text
+            .toLowerCase()
+            .split(/\s+/)
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    }
 }

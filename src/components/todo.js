@@ -1,5 +1,6 @@
 const { isDate, format } = require("date-fns");
 import { Utils } from "../modules/utils.js";
+import { Store } from "../modules/storage.js";
 
 /**
  * A class representing a Todo item: stores all data related to the
@@ -10,13 +11,15 @@ import { Utils } from "../modules/utils.js";
  * @param description
  * @param dueDate
  * @param priority
+ * @param project
  */
 export default class Todo {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, projectName) {
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.dueDate = new Date(dueDate);
         this.priority = priority;
+        this.project = projectName;
     }
 
     #uid = Utils.generateHexId();
@@ -43,11 +46,11 @@ export default class Todo {
 
     get dueDate() {
         const date = this._dueDate;
-        return format(date, "dd/MM/yyyy");
+        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
     }
 
     set dueDate(value) {
-        this._dueDate = isDate(value) ? value : this._dueDate;
+        this._dueDate = value instanceof Date ? value : this._dueDate;
     }
 
     get priority() {
@@ -58,8 +61,16 @@ export default class Todo {
         this._priority = typeof value === "number" ? value : this._priority;
     }
 
+    get project() {
+        return this._project;
+    }
+
+    set project(value) {
+        this._project = Store.doProjectExist(value) ? value : this._project;
+    }
+
     getUid() {
-        return this.#uid
+        return this.#uid;
     }
     //#endregion
 
@@ -72,7 +83,7 @@ export default class Todo {
      * Takes control of serialization process and makes sure that the saved
      * todo can be reinstantiated smoothly while preserving the getter and
      * setter architcture and private variables.
-     * @returns 
+     * @returns
      */
     toJSON() {
         return {
@@ -81,6 +92,7 @@ export default class Todo {
             description: this._description,
             dueDate: this._dueDate,
             priority: this._priority,
+            project: this._project,
             done: this.#done,
         };
     }
@@ -90,9 +102,15 @@ export default class Todo {
      */
     static fromJSON(json) {
         const obj = JSON.parse(json);
-        const todo = new Todo(obj.title, obj.description, obj.dueDate, obj.priority);
+        const todo = new Todo(
+            obj.title,
+            obj.description,
+            obj.dueDate,
+            obj.priority,
+            obj.project
+        );
         todo.#done = obj.done;
-        todo.#uid = obj.uid
+        todo.#uid = obj.uid;
         return todo;
     }
     //#endregion
