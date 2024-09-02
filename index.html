@@ -82,14 +82,81 @@
             <!-- #endregion -->
             <!-- #region Content Area -->
             <div id="content">
-                <h2 id="projectName">Project Name</h2>
-                <button id="insideProjectAddButton">
-                    <span class="material-symbols-outlined"> add </span>
-                    <p>Add a task</p>
-                </button>
-                <div id="emptyProjectScreen">
-                    <img id="emptyImage" src="../assets/notepad-note-svgrepo-com.svg" alt="Empty project image" />
-                    <p id="emptyProjectText">Looks like this project is empty, let's start something new!</p>
+                <div id="content-view">
+                    <h2 id="projectName">Project Name</h2>
+                    <button id="insideProjectAddButton">
+                        <span class="material-symbols-outlined"> add </span>
+                        <p>Add a task</p>
+                    </button>
+                    <ol id="todoView">
+                        <!-- #region Fake Todos -->
+                        <li class="todo" uid="anHex">
+                            <input type="checkbox" name="doneCheck" id="doneCheck">
+                            <div class="todoInfoTab">
+                                <h2 class="todoTitle">Stuff</h2>
+                                <p id="todoDesc">Stuff to do, places to see...</p>
+                            </div>
+                            <div class="todoDateProjectTab">
+                                <time datetime="02/09/2024">02/09/2024</time>
+                                <p class="todoProject">Project Name</p>
+                            </div>
+    
+                        </li>
+                        <li class="todo" uid="anHex">
+                            <input type="checkbox" name="doneCheck" id="doneCheck">
+                            <div class="todoInfoTab">
+                                <h2 class="todoTitle">Stuff</h2>
+                                <p id="todoDesc">Stuff to do, places to see...</p>
+                            </div>
+                            <div class="todoDateProjectTab">
+                                <time datetime="02/09/2024">02/09/2024</time>
+                                <p class="todoProject">Project Name</p>
+                            </div>
+    
+                        </li>
+                        <li class="todo" uid="anHex">
+                            <input type="checkbox" name="doneCheck" id="doneCheck">
+                            <div class="todoInfoTab">
+                                <h2 class="todoTitle">Stuff</h2>
+                                <p id="todoDesc">Stuff to do, places to see...</p>
+                            </div>
+                            <div class="todoDateProjectTab">
+                                <time datetime="02/09/2024">02/09/2024</time>
+                                <p class="todoProject">Project Name</p>
+                            </div>
+    
+                        </li>
+                        <li class="todo" uid="anHex">
+                            <input type="checkbox" name="doneCheck" id="doneCheck">
+                            <div class="todoInfoTab">
+                                <h2 class="todoTitle">Stuff</h2>
+                                <p id="todoDesc">Stuff to do, places to see...</p>
+                            </div>
+                            <div class="todoDateProjectTab">
+                                <time datetime="02/09/2024">02/09/2024</time>
+                                <p class="todoProject">Project Name</p>
+                            </div>
+    
+                        </li>
+                        <li class="todo" uid="anHex">
+                            <input type="checkbox" name="doneCheck" id="doneCheck">
+                            <div class="todoInfoTab">
+                                <h2 class="todoTitle">Stuff</h2>
+                                <p id="todoDesc">Stuff to do, places to see...</p>
+                            </div>
+                            <div class="todoDateProjectTab">
+                                <time datetime="02/09/2024">02/09/2024</time>
+                                <p class="todoProject">Project Name</p>
+                            </div>
+    
+                        </li>
+                        <!-- #endregion -->
+                    </div>
+                    <div id="emptyProjectScreen" style="display: none;">
+                        <img id="emptyImage" src="../assets/notepad-note-svgrepo-com.svg" alt="Empty project image" />
+                        <p id="emptyProjectText">Looks like this project is empty, let's start something new!</p>
+                    </div>
+
                 </div>
             </div>
             <!-- #endregion -->
