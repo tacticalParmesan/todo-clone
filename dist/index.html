@@ -17,8 +17,10 @@
             <!-- #region Sidebar -->
             <nav id="sidebar">
                 <section class="sidebarPanel" id="userPanel">
-                    <p id="userCircle">EF</p>
-                    <p id="username">Username</p>
+                    <div id="userInfo">
+                        <p id="userCircle">EF</p>
+                        <p id="username">Username</p>
+                    </div>
                     <button id="foldButton">
                         <span class="material-symbols-outlined">
                             left_panel_close
@@ -26,8 +28,10 @@
                     </button>
                 </section>
                 <section class="sidebarPanel" id="mainPanel">
-                    <button>
-                        <span class="material-symbols-outlined"> add </span>
+                    <button id="addTodoButton">
+                        <span class="material-symbols-outlined">
+                            add_circle
+                        </span>
                         <p>Add a task</p>
                     </button>
                     <div class="tab" id="inbox">
@@ -53,12 +57,39 @@
                             <span class="material-symbols-outlined"> add </span>
                         </button>
                     </div>
-                    <ol id="projectList"></ol>
+                    <ol id="projectList">
+                        <li class="tab projectTab">
+                            <span class="material-symbols-outlined">
+                                tactic
+                            </span>
+                            <p class="projectName" id="nameof">Shopping</p>
+                        </li>
+                        <li class="tab projectTab">
+                            <span class="material-symbols-outlined">
+                                tactic
+                            </span>
+                            <p class="projectName" id="nameof">Housework</p>
+                        </li>
+                        <li class="tab projectTab">
+                            <span class="material-symbols-outlined">
+                                tactic
+                            </span>
+                            <p class="projectName" id="nameof">Work</p>
+                        </li>
+                    </ol>
                 </section>
             </nav>
             <!-- #endregion -->
             <!-- #region Content Area -->
-            <div id="content"></div>
+            <div id="content">
+                <h2 id="projectName">Project Name</h2>
+                <button id="insideProjectAddButton">
+                    <span class="material-symbols-outlined"> add </span>
+                    <p>Add a task</p>
+                </button>
+                <img id="emptyImage" src="" alt="Empty project image" />
+                <p id="emptyProjectText">This project is empty, gyat</p>
+            </div>
             <!-- #endregion -->
         </main>
     </body>
