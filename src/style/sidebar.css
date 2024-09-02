@@ -1,7 +1,8 @@
 #sidebar {
     background-color: blanchedalmond;
-    width: clamp(210px, 280px, 420px);
+    width: 240px;
     padding: 0.5rem;
+    
 }
 
 #sidebar,
