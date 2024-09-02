@@ -1,5 +1,6 @@
 @import "sidebar.css";
 @import "content.css";
+@import "todo.css";
 
 /*#region CSS Reset */
 :root {

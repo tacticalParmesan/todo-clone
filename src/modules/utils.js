@@ -36,8 +36,8 @@ export class Utils {
         let hex = "";
         for (let i = 0; i < 6; i++) {
             const randN = Math.floor(Math.random() * 16);
-            hex += randN.toString(16)
+            hex += randN.toString(16);
         }
+        return hex;
     }
-    
 }

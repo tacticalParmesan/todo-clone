@@ -19,7 +19,7 @@ export default class Todo {
         this.priority = priority;
     }
 
-    #id = Utils.generateHexId();
+    #uid = Utils.generateHexId();
 
     /** Checks wheter the task is done. */
     #done = false;
@@ -57,6 +57,10 @@ export default class Todo {
     set priority(value) {
         this._priority = typeof value === "number" ? value : this._priority;
     }
+
+    getUid() {
+        return this.#uid
+    }
     //#endregion
 
     //#region Instance Methods
@@ -72,6 +76,7 @@ export default class Todo {
      */
     toJSON() {
         return {
+            uid: this.#uid,
             title: this._title,
             description: this._description,
             dueDate: this._dueDate,
@@ -87,6 +92,7 @@ export default class Todo {
         const obj = JSON.parse(json);
         const todo = new Todo(obj.title, obj.description, obj.dueDate, obj.priority);
         todo.#done = obj.done;
+        todo.#uid = obj.uid
         return todo;
     }
     //#endregion
