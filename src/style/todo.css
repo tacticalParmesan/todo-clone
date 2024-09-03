@@ -1,6 +1,5 @@
 #todoView {
     width: 100%;
-    flex: 1;
 }
 
 .todo {
@@ -20,7 +19,7 @@
     gap: 0.5rem;
 }
 
-.done .todoTitle, 
+.done .todoTitle,
 .done .todoDesc {
     text-decoration: line-through;
 }

@@ -20,7 +20,7 @@ export class Store {
         for (const project of projects) {
             if (project instanceof Project) {
                 localStorage.setItem(project.name, JSON.stringify(project));
-                console.info(`Saved project ${project.name} in storage.`)
+                console.info(`Saved project ${project.name} in storage.`);
             }
         }
     }
@@ -38,7 +38,7 @@ export class Store {
         }
 
         const projectObject = localStorage.getItem(projectName);
-        console.info(`Loaded project ${projectName} from storage.`)
+        console.info(`Loaded project ${projectName} from storage.`);
 
         return Project.fromJSON(projectObject);
     }

@@ -1,5 +1,6 @@
 import { Utils } from "./utils";
 import { Store } from "./storage";
+import { Card } from "../components/card";
 
 export class Gui {
     constructor() {}
@@ -43,16 +44,22 @@ export class Gui {
         const todoList = project.getTodosList();
 
         this.clearTodoView();
-        projectName.textContent = project.name;
+        projectName.textContent = Utils.toTitleCase(project.name);
 
         for (const todo of todoList) {
             todoView.appendChild(this.renderTodo(todo));
         }
     }
 
+    /**
+     * Switches the content view between projects, from current
+     * to target one.
+     * @param {*} target
+     */
     static switchProject(target) {
-        this.currentProject = target
-        this.renderProject(target)
+        this.currentProject = target;
+        this.renderProject(target);
+        this.checkForEmptyProject();
     }
 
     /**
@@ -74,10 +81,12 @@ export class Gui {
         // Applies Css to done todos to tell them apart
         if (todo.getStatus()) {
             newTodoCard.classList.add("done");
-            checkbox.checked = true
+            checkbox.checked = true;
         }
 
-        checkbox.addEventListener("change", () => this.checkTodo(todo, newTodoCard));
+        checkbox.addEventListener("change", () =>
+            Card.checkTodo(todo, newTodoCard)
+        );
         newTodoCard.append(checkbox);
 
         /**
@@ -127,9 +136,16 @@ export class Gui {
 
     static renderFiltered(property, value) {}
 
-    static checkTodo(todo, todoUI) {
-        todo.toggleStatus();
-        todoUI.classList.toggle("done");
-        Store.saveProject(this.currentProject)
+    /**
+     * Checks if the currently displayed project is empty and shows
+     * call to action graphic if this is the case.
+     */
+    static checkForEmptyProject() {
+        const empty = document.querySelector("#emptyProjectScreen");
+        if (!this.currentProject.getTodosList()[0]) {
+            empty.style.display = "flex";
+        } else {
+            empty.style.display = "none";
+        }
     }
 }

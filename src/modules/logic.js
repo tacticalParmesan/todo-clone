@@ -145,10 +145,6 @@ export class Logic {
      * Loads the 'general' project at startup to contain and serve
      * todos that do not belong to a named project. Creats the default
      * project if it does not exist.
-     * @returns a reference to 'general' project and amessage for 
-     * signaling wheter the  project was newly created or simply.
-     * loaded. This avoids saving in memory the full project at 
-     * every startup.
      */
     static initDefaultProject() {
         let general = Store.loadProject("general");
@@ -158,7 +154,7 @@ export class Logic {
                 "general",
                 "Container project for uncategorized todos."
             );
-            Store.saveProject(general)
+            Store.saveProject(general);
         }
         return general;
     }

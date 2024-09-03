@@ -87,7 +87,7 @@ export default class Project {
         const obj = JSON.parse(json);
         const project = new Project(obj.name, obj.description);
 
-        if (obj.complete) project.toggleStatus()
+        if (obj.complete) project.toggleStatus();
 
         obj.todos.forEach((todo) => {
             project.todos.push(Todo.fromJSON(JSON.stringify(todo)));

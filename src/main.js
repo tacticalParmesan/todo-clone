@@ -14,11 +14,13 @@ const Startup = (function () {
 
     document.addEventListener("DOMContentLoaded", () => {
         general = Logic.initDefaultProject();
-        Gui.renderProject(general)
+        Gui.switchProject(Store.loadProject("Housework"))
     });
 
     return { general };
 })();
+
+
 
 
 
