@@ -13,6 +13,32 @@ export class Gui {
     //#endregion
 
     /**
+     * The current project shown in the content area.
+     * Gets updated on project switching.
+     */
+    currentProject;
+
+    /**
+     * Clears the Todo view in the content panel by wiping
+     * todo child elements.
+     */
+    static clearTodoList() {
+        const todoList = document.querySelector("#todoView");
+
+        while (todoList.firstChild) {
+            todoList.removeChild(todoList.firstChild);
+        }
+    }
+
+    /**
+     * Loads the clicked project in the GUI by calling the Storage component
+     * to acquire the project data and by calling the rendering method onto
+     * the collection of todos.
+     * @param {*} project
+     */
+    static renderProject(project) {}
+
+    /**
      * Renders a Todo object in the GUI and lets the user interact
      * with it. Takes a Todo instance as argument.
      * @param {*} todo

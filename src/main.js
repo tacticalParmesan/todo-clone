@@ -5,22 +5,18 @@ import "./style/main.css";
 import Project from "./components/project";
 import { Gui } from "./modules/gui";
 
-// const h = Logic.createProject("housework", "stuff")
-const h = Store.loadProject("housework");
+/**
+ * Handles startup of the Todo app by loading event listeners
+ * and calling initialization functions.
+ */
+const Startup = (function () {
+    let general;
 
-// Logic.createTodo({
-//     title: "Clean kitchen",
-//     description: "Make it shine!",
-//     dueDate: Date.now(),
-//     priority: 1,
-//     projectName: h.name
-// }, h)
+    document.addEventListener("DOMContentLoaded", () => {
+        general = Logic.initDefaultProject()
+    });
 
-const clean = h.getTodosList()[0];
+    return { general };
+})();
 
-// // Logic.deleteTodo(h, clean)
 
-console.log(Gui.renderTodo(clean));
-document.querySelector("#todoView").appendChild(Gui.renderTodo(clean));
-
-Store.saveProject(h);
