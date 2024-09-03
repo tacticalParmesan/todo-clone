@@ -72,6 +72,10 @@ export default class Todo {
     getUid() {
         return this.#uid;
     }
+
+    getStatus() {
+        return this.#done;
+    }
     //#endregion
 
     //#region Instance Methods

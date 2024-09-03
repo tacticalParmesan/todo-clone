@@ -1,4 +1,5 @@
 import { Utils } from "./utils";
+import { Store } from "./storage";
 
 export class Gui {
     constructor() {}
@@ -22,11 +23,11 @@ export class Gui {
      * Clears the Todo view in the content panel by wiping
      * todo child elements.
      */
-    static clearTodoList() {
-        const todoList = document.querySelector("#todoView");
+    static clearTodoView() {
+        const todoView = document.querySelector("#todoView");
 
-        while (todoList.firstChild) {
-            todoList.removeChild(todoList.firstChild);
+        while (todoView.firstChild) {
+            todoView.removeChild(todoView.firstChild);
         }
     }
 
@@ -36,7 +37,23 @@ export class Gui {
      * the collection of todos.
      * @param {*} project
      */
-    static renderProject(project) {}
+    static renderProject(project) {
+        const projectName = document.querySelector("#projectName");
+        const todoView = document.querySelector("#todoView");
+        const todoList = project.getTodosList();
+
+        this.clearTodoView();
+        projectName.textContent = project.name;
+
+        for (const todo of todoList) {
+            todoView.appendChild(this.renderTodo(todo));
+        }
+    }
+
+    static switchProject(target) {
+        this.currentProject = target
+        this.renderProject(target)
+    }
 
     /**
      * Renders a Todo object in the GUI and lets the user interact
@@ -49,14 +66,19 @@ export class Gui {
         newTodoCard.classList.add("todo");
         newTodoCard.setAttribute("uid", todo.getUid());
 
-        // <input type="checkbox" name="doneCheck" id="doneCheck">
+        // <input type="checkbox" name="doneCheck">
         const checkbox = document.createElement("input");
         checkbox.setAttribute("type", "checkbox");
         checkbox.classList.add("doneCheck");
-        newTodoCard.append(checkbox);
 
-        // Todo add event listener for editing ui and toggle status
-        // If done==true ^^^
+        // Applies Css to done todos to tell them apart
+        if (todo.getStatus()) {
+            newTodoCard.classList.add("done");
+            checkbox.checked = true
+        }
+
+        checkbox.addEventListener("change", () => this.checkTodo(todo, newTodoCard));
+        newTodoCard.append(checkbox);
 
         /**
          * <div class="todoInfoTab">
@@ -101,5 +123,13 @@ export class Gui {
         // </li>
         newTodoCard.appendChild(dateProjTab);
         return newTodoCard;
+    }
+
+    static renderFiltered(property, value) {}
+
+    static checkTodo(todo, todoUI) {
+        todo.toggleStatus();
+        todoUI.classList.toggle("done");
+        Store.saveProject(this.currentProject)
     }
 }

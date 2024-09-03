@@ -13,10 +13,12 @@ const Startup = (function () {
     let general;
 
     document.addEventListener("DOMContentLoaded", () => {
-        general = Logic.initDefaultProject()
+        general = Logic.initDefaultProject();
+        Gui.renderProject(general)
     });
 
     return { general };
 })();
+
 
 
