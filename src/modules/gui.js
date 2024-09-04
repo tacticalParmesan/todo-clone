@@ -1,6 +1,7 @@
 import { Utils } from "./utils";
 import { Store } from "./storage";
 import { Card } from "../components/card";
+import { Sidebar } from "../components/sidebar";
 
 export class Gui {
     constructor() {}
@@ -31,6 +32,7 @@ export class Gui {
             todoView.removeChild(todoView.firstChild);
         }
     }
+
 
     /**
      * Loads the clicked project in the GUI by calling the Storage component

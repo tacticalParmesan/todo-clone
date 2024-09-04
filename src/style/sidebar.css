@@ -1,7 +1,9 @@
 #sidebar {
+    z-index: 1;
     background-color: blanchedalmond;
     width: 240px;
     padding: 0.5rem;
+    height: 100vh;
 }
 
 #sidebar,

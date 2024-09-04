@@ -84,16 +84,19 @@
             <div id="content">
                 <div id="content-view">
                     <h2 id="projectName">Project Name</h2>
+
                     <button id="insideProjectAddButton">
                         <span class="material-symbols-outlined"> add </span>
                         <p>Add a task</p>
                     </button>
                     <ol id="todoView"></ol>
-                    <div id="emptyProjectScreen">
+                    <div class="hidden" id="emptyProjectScreen">
                         <img
                             id="emptyImage"
                             src="../assets/notepad-note-svgrepo-com.svg"
                             alt="Empty project image"
+                            width="160px"
+                            height="160px"
                         />
                         <p id="emptyProjectText">
                             Looks like this project is empty, let's start
@@ -105,4 +108,5 @@
             <!-- #endregion -->
         </main>
     </body>
+    <script src="main.js"></script>
 </html>

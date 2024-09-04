@@ -13,7 +13,7 @@ import Todo from "./todo";
  */
 export default class Project {
     constructor(name, description) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.description = description;
     }
 

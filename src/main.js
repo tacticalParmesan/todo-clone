@@ -4,6 +4,7 @@ import { Store } from "./modules/storage";
 import "./style/main.css";
 import Project from "./components/project";
 import { Gui } from "./modules/gui";
+import { Sidebar } from "./components/sidebar";
 
 /**
  * Handles startup of the Todo app by loading event listeners
@@ -14,8 +15,12 @@ const Startup = (function () {
 
     document.addEventListener("DOMContentLoaded", () => {
         general = Logic.initDefaultProject();
-        Gui.switchProject(Store.loadProject("Housework"))
+        Gui.switchProject(general)
     });
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+        Sidebar.showProjects()
+    })
 
     return { general };
 })();
