@@ -7,19 +7,56 @@
     flex: 1;
     gap: 1rem;
     align-items: center;
-    justify-content: space-between;
+    
     padding: 1rem;
     width: 100%;
 }
 
-.todoDateProjectTab {
+.todoInfoTab {
+    align-self: flex-start;
     display: flex;
-    margin-left: auto;
+    flex-direction: column;
+}
+
+.todoDesc {
     margin-top: auto;
+}
+
+.rightTab {
+    margin-left: auto;
+}
+
+.todoDateProjectTab {
+    align-self: flex-end;
+    display: flex;
     gap: 0.5rem;
+}
+
+.buttonsTab {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+}
+
+.todoButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    padding: 1rem;
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.todoButton:hover {
+    background-color: blanchedalmond;
 }
 
 .done .todoTitle,
 .done .todoDesc {
-    text-decoration: line-through;
+    text-decoration: line-through
 }

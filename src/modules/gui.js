@@ -33,7 +33,6 @@ export class Gui {
         }
     }
 
-
     /**
      * Loads the clicked project in the GUI by calling the Storage component
      * to acquire the project data and by calling the rendering method onto
@@ -113,6 +112,36 @@ export class Gui {
         newTodoCard.appendChild(infoTab);
 
         /**
+         * <div class="rightTab"
+         *   <div class="buttonsTab">
+         *       <button class="todoButton editButton"></button>
+         *       <button class="todoButton deleteButton"></button>
+         *   </div>
+         */
+        const rightSideTab = document.createElement("div");
+        rightSideTab.classList.add("rightTab");
+
+        const buttonsTab = document.createElement("div");
+        buttonsTab.classList.add("buttonsTab");
+
+        const editButton = document.createElement("button");
+        editButton.classList.add("todoButton", "editButton");
+        const editIcon = document.createElement("span");
+        editIcon.classList.add("material-symbols-outlined")
+        editIcon.textContent = "edit" 
+        editButton.appendChild(editIcon)
+
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("todoButton", "deleteButton");
+        const delIcon = document.createElement("span");
+        delIcon.classList.add("material-symbols-outlined")
+        delIcon.textContent = "delete" 
+        deleteButton.appendChild(delIcon)
+
+        buttonsTab.append(editButton, deleteButton);
+        rightSideTab.append(buttonsTab);
+
+        /**
          * <div class="todoDateProjectTab">
          *     <time datetime="02/09/2024">02/09/2024</time>
          *     <p class="todoProject">Project Name</p>
@@ -128,11 +157,11 @@ export class Gui {
         const project = document.createElement("p");
         project.classList.add("todoProject");
         project.textContent = Utils.toTitleCase(todo.project);
-        dateProjTab.appendChild(dueDate);
-        dateProjTab.appendChild(project);
+        dateProjTab.append(dueDate, project);
+        rightSideTab.append(dateProjTab);
 
         // </li>
-        newTodoCard.appendChild(dateProjTab);
+        newTodoCard.appendChild(rightSideTab);
         return newTodoCard;
     }
 
@@ -150,4 +179,4 @@ export class Gui {
             empty.style.display = "none";
         }
     }
-}
+};

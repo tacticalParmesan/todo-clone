@@ -57,7 +57,9 @@ export class Sidebar {
             projectName.textContent = Utils.toTitleCase(project);
 
             tab.append(icon, projectName);
-            tab.addEventListener("click", () => Gui.switchProject(Store.loadProject(project)))
+            tab.addEventListener("click", () =>
+                Gui.switchProject(Store.loadProject(project))
+            );
             projectsList.appendChild(tab);
         }
     }

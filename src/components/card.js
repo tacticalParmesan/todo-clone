@@ -1,3 +1,6 @@
+import { Gui } from "../modules/gui";
+import { Store } from "../modules/storage";
+
 export class Card {
     constructor() {}
 
@@ -18,7 +21,7 @@ export class Card {
     static checkTodo(todo, todoUI) {
         todo.toggleStatus();
         todoUI.classList.toggle("done");
-        Store.saveProject(this.currentProject);
+        Store.saveProject(Gui.currentProject);
     }
 
     static editTodo() {}
