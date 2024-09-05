@@ -47,7 +47,7 @@
                         <span class="material-symbols-outlined">
                             calendar_month
                         </span>
-                        <p class="panelText">Inbox</p>
+                        <p class="panelText">Upcoming</p>
                     </div>
                 </section>
                 <section class="sidebarPanel" id="projectPanel">
@@ -84,11 +84,6 @@
             <div id="content">
                 <div id="content-view">
                     <h2 id="projectName">Project Name</h2>
-
-                    <button id="insideProjectAddButton">
-                        <span class="material-symbols-outlined"> add </span>
-                        <p>Add a task</p>
-                    </button>
                     <ol id="todoView"></ol>
                     <div class="hidden" id="emptyProjectScreen">
                         <img
@@ -105,6 +100,43 @@
                     </div>
                 </div>
             </div>
+            <!-- #endregion -->
+            <!-- #region Form -->
+            <dialog id="todoDialog">
+                <form action="" id="todoForm">
+                    <div id="upperPanel">
+                        <input
+                            type="text"
+                            name=""
+                            id="formTitle"
+                            placeholder="Todo name"
+                        />
+                        <input
+                            type="text"
+                            name=""
+                            id="formDesc"
+                            placeholder="Description"
+                        />
+                    </div>
+                    <div id="formOptions">
+                        <input type="date" name="" id="formDate" />
+                        <select name="" id="formPriority">
+                            <option value="" disabled selected>Priority</option>
+                            <option value="1">Priority 1</option>
+                            <option value="1">Priority 2</option>
+                            <option value="1">Priority 3</option>
+                            <option value="1">Priority 4</option>
+                        </select>
+                        <select name="" id="formProject">
+                            <option value="general" selected>General</option>
+                        </select>
+                    </div>
+                    <div id="lowerPanel">
+                        <button id="closeForm">Close</button>
+                        <button id="saveTodo">Add todo</button>
+                    </div>
+                </form>
+            </dialog>
             <!-- #endregion -->
         </main>
     </body>

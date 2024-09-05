@@ -18,6 +18,7 @@ const Startup = (function () {
     });
 
     document.addEventListener("DOMContentLoaded", ()=>{
+        Sidebar.init()
         Sidebar.showProjects()
     })
 

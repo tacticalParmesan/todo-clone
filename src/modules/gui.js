@@ -138,6 +138,10 @@ export class Gui {
         delIcon.textContent = "delete" 
         deleteButton.appendChild(delIcon)
 
+        deleteButton.addEventListener("click", () => {
+            Card.deleteTodo(todo, newTodoCard)
+        })
+
         buttonsTab.append(editButton, deleteButton);
         rightSideTab.append(buttonsTab);
 

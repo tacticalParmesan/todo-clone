@@ -1,6 +1,7 @@
 @import "sidebar.css";
 @import "content.css";
 @import "todo.css";
+@import "form.css";
 @import "mobile.css";
 
 /*#region CSS Reset */

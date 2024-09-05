@@ -1,4 +1,5 @@
 import { Gui } from "../modules/gui";
+import { Logic } from "../modules/logic";
 import { Store } from "../modules/storage";
 
 export class Card {
@@ -21,10 +22,31 @@ export class Card {
     static checkTodo(todo, todoUI) {
         todo.toggleStatus();
         todoUI.classList.toggle("done");
-        Store.saveProject(Gui.currentProject);
+
+        // Ternary operator in case we are in the "General" view or in a filtered one.
+        Store.saveProject(
+            Gui.currentProject.name === todo.project
+                ? Gui.currentProject
+                : Store.loadProject(todo.project)
+        );
     }
 
-    static editTodo() {}
+    static editTodo(todo, todoUI) {
+        // Open form in edit mode
 
-    static deleteTodo() {}
+        // Saved values change the ones displayed
+    }
+
+    static deleteTodo(todo, todoUI) {
+        let project =
+            Gui.currentProject.name === todo.project
+                ? Gui.currentProject
+                : Store.loadProject(todo.project);
+
+        Logic.deleteTodo(project, todo);
+        document.querySelector("#todoView").removeChild(todoUI)
+
+        // Ternary operator in case we are in the "General" view or in a filtered one.
+        Store.saveProject(project);
+    }
 }

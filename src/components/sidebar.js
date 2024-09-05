@@ -1,6 +1,7 @@
 import { Gui } from "../modules/gui";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
+import { Form } from "./form";
 
 export class Sidebar {
     constructor() {}
@@ -13,7 +14,10 @@ export class Sidebar {
         return Sidebar.instance;
     }
     //#endregion
-    static init() {}
+    static init() {
+        const addTodoButton = document.querySelector("#addTodoButton")
+        addTodoButton.onclick = () => Form.init()
+    }
 
     static showNewTodoModal() {}
 
