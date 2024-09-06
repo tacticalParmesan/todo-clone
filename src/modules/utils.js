@@ -55,15 +55,4 @@ export class Utils {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
     }
-
-    /**
-     * Checks if the passed date is today.
-     * @param {*} date 
-     * @returns 
-     */
-    static isToday(date) {
-        const today = new Date().toLocaleDateString();
-        const locDate = new Date(date).toLocaleDateString();
-        return (today === locDate) ? true : false
-    }
 }

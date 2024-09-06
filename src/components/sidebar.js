@@ -15,6 +15,11 @@ export class Sidebar {
         return Sidebar.instance;
     }
     //#endregion
+
+    /**
+     * Initalizes the Sidebar, gives the first update to dynamic sidebar
+     * elements and activates buttons,
+     */
     static init() {
         const addTodoButton = document.querySelector("#addTodoButton")
         addTodoButton.onclick = () => Form.init()
@@ -24,6 +29,9 @@ export class Sidebar {
 
     static foldSidebar() {}
 
+    /**
+     * Updates the number of today todos displayed in the Sidebar.
+     */
     static showTodayTodos() {
         const todayNumber = document.querySelector("#todoNumber")
         const todayTodos = Store.loadAllTodos().filter((todo) => isToday(todo.dueDate))
@@ -65,6 +73,11 @@ export class Sidebar {
         }
     }
 
+    /**
+     * Checks at the moment of creation and deletion if the number
+     * of today todos in the Sidebar should be updated.
+     * @param {*} todo 
+     */
     static checkForToday(todo) {
         if (isToday(todo.dueDate)) {
             Sidebar.showTodayTodos();

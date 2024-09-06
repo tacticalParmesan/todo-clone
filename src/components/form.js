@@ -6,6 +6,10 @@ import { format, isToday } from "date-fns";
 import { Sidebar } from "./sidebar";
 import { Card } from "./card";
 
+/**
+ * Interface for getting and manipulation data about a todo.
+ * Handles static and interactive elements of the Todo dialog.
+ */
 export class Form {
     constructor() {}
 
