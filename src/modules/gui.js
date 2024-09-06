@@ -48,7 +48,7 @@ export class Gui {
         projectName.textContent = Utils.toTitleCase(project.name);
 
         for (const todo of todoList) {
-            todoView.appendChild(this.renderTodo(todo));
+            todoView.appendChild(Card.create(todo));
         }
     }
 
@@ -61,112 +61,6 @@ export class Gui {
         this.currentProject = target;
         this.renderProject(target);
         this.checkForEmptyProject();
-    }
-
-    /**
-     * Renders a Todo object in the GUI and lets the user interact
-     * with it. Takes a Todo instance as argument.
-     * @param {*} todo
-     */
-    static renderTodo(todo) {
-        // <li class="todo" uid="anHex">
-        const newTodoCard = document.createElement("li");
-        newTodoCard.classList.add("todo");
-        newTodoCard.setAttribute("uid", todo.getUid());
-
-        // <input type="checkbox" name="doneCheck">
-        const checkbox = document.createElement("input");
-        checkbox.setAttribute("type", "checkbox");
-        checkbox.classList.add("doneCheck");
-
-        // Applies Css to done todos to tell them apart
-        if (todo.getStatus()) {
-            newTodoCard.classList.add("done");
-            checkbox.checked = true;
-        }
-
-        checkbox.addEventListener("change", () =>
-            Card.checkTodo(todo, newTodoCard)
-        );
-        newTodoCard.append(checkbox);
-
-        /**
-         * <div class="todoInfoTab">
-         *     <h2 class="todoTitle">Stuff</h2>
-         *     <p class="todoDesc">Stuff to do, places to see...</p>
-         * </div>
-         */
-        const infoTab = document.createElement("div");
-        infoTab.classList.add("todoInfoTab");
-
-        const title = document.createElement("h2");
-        title.classList.add("todoTitle");
-        title.textContent = todo.title;
-
-        const description = document.createElement("p");
-        description.classList.add("todoDesc");
-        description.textContent = todo.description;
-
-        infoTab.appendChild(title);
-        infoTab.appendChild(description);
-        newTodoCard.appendChild(infoTab);
-
-        /**
-         * <div class="rightTab"
-         *   <div class="buttonsTab">
-         *       <button class="todoButton editButton"></button>
-         *       <button class="todoButton deleteButton"></button>
-         *   </div>
-         */
-        const rightSideTab = document.createElement("div");
-        rightSideTab.classList.add("rightTab");
-
-        const buttonsTab = document.createElement("div");
-        buttonsTab.classList.add("buttonsTab");
-
-        const editButton = document.createElement("button");
-        editButton.classList.add("todoButton", "editButton");
-        const editIcon = document.createElement("span");
-        editIcon.classList.add("material-symbols-outlined")
-        editIcon.textContent = "edit" 
-        editButton.appendChild(editIcon)
-
-        const deleteButton = document.createElement("button");
-        deleteButton.classList.add("todoButton", "deleteButton");
-        const delIcon = document.createElement("span");
-        delIcon.classList.add("material-symbols-outlined")
-        delIcon.textContent = "delete" 
-        deleteButton.appendChild(delIcon)
-
-        deleteButton.addEventListener("click", () => {
-            Card.deleteTodo(todo, newTodoCard)
-        })
-
-        buttonsTab.append(editButton, deleteButton);
-        rightSideTab.append(buttonsTab);
-
-        /**
-         * <div class="todoDateProjectTab">
-         *     <time datetime="02/09/2024">02/09/2024</time>
-         *     <p class="todoProject">Project Name</p>
-         * </div>
-         */
-        const dateProjTab = document.createElement("div");
-        dateProjTab.classList.add("todoDateProjectTab");
-
-        const dueDate = document.createElement("time");
-        dueDate.setAttribute("datetime", todo.dueDate);
-        dueDate.textContent = todo.dueDate;
-
-        const project = document.createElement("p");
-        project.classList.add("todoProject");
-        project.textContent = Utils.toTitleCase(todo.project);
-        dateProjTab.append(dueDate, project);
-        rightSideTab.append(dateProjTab);
-
-        // </li>
-        newTodoCard.appendChild(rightSideTab);
-        return newTodoCard;
     }
 
     static renderFiltered(property, value) {}
@@ -183,4 +77,4 @@ export class Gui {
             empty.style.display = "none";
         }
     }
-};
+}

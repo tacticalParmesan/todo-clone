@@ -4,6 +4,7 @@ import Project from "./components/project";
 import { Gui } from "./modules/gui";
 import { Sidebar } from "./components/sidebar";
 import "./style/main.css";
+import { Card } from "./components/card";
 
 /**
  * Handles startup of the Todo app by loading event listeners

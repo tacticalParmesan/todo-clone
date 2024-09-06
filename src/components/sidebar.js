@@ -39,31 +39,23 @@ export class Sidebar {
 
     /**
      * Loads clickable projects tab under the porject list in the sidebar.
+     * Uses the template from the hidden 'templates' html element.
      */
     static showProjects() {
         const projectsList = document.querySelector("#projectList");
+        const template = document.querySelector("#projectTabTemplate")
         this.clearProjects();
+        
         for (const project of Object.keys(localStorage)) {
             if (project === "general") {
                 continue;
             }
 
-            const tab = document.createElement("li");
-            tab.classList.add("tab", "projectTab");
+            const tab = template.cloneNode(true);
             tab.id = project.toLowerCase();
 
-            const icon = document.createElement("span");
-            icon.classList.add("material-symbols-outlined");
-            icon.textContent = "tactic";
-
-            const projectName = document.createElement("p");
-            projectName.classList.add("projectName");
-            projectName.textContent = Utils.toTitleCase(project);
-
-            tab.append(icon, projectName);
-            tab.addEventListener("click", () =>
-                Gui.switchProject(Store.loadProject(project))
-            );
+            tab.querySelector(".projectName").textContent = Utils.toTitleCase(project);
+            tab.onclick = () => Gui.switchProject(Store.loadProject(project))
             projectsList.appendChild(tab);
         }
     }
