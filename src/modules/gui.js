@@ -48,7 +48,7 @@ export class Gui {
         projectName.textContent = Utils.toTitleCase(project.name);
 
         for (const todo of todoList) {
-            todoView.appendChild(Card.create(todo));
+            todoView.appendChild(Card.createCard(todo));
         }
     }
 

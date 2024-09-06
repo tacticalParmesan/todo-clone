@@ -57,7 +57,7 @@ export default class Todo {
     }
 
     set priority(value) {
-        this._priority = typeof value === "number" ? value : this._priority;
+        this._priority = value;
     }
 
     get project() {

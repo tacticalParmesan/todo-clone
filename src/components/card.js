@@ -2,6 +2,9 @@ import { Gui } from "../modules/gui";
 import { Logic } from "../modules/logic";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
+import { Form } from "./form";
+import { Sidebar } from "./sidebar";
+import { isToday } from "date-fns";
 
 export class Card {
     constructor() {}
@@ -32,10 +35,9 @@ export class Card {
         );
     }
 
-    static editTodo(todo, todoUI) {
-        // Open form in edit mode
-        // Saved values change the ones displayed
-    }
+    static editTodoUI(element, todoUI) {
+        todoUI.querySelector(`[prop=${element[0]}]`).textContent = element[1]
+    } 
 
     /**
      * Deletes a todo from the in-memory list and from the UI view.
@@ -52,6 +54,8 @@ export class Card {
         document.querySelector("#todoView").removeChild(todoUI);
 
         Store.saveProject(project);
+
+        Sidebar.checkForToday(todo)
     }
 
     /**
@@ -62,7 +66,7 @@ export class Card {
      * @param {*} todo
      * @returns
      */
-    static create(todo) {
+    static createCard(todo) {
         // Clones the todo to display from the template. Cleans its properties.
         const template = document.querySelector(".todoTemplate");
         const newCard = template.cloneNode(true);
@@ -86,8 +90,11 @@ export class Card {
         );
         newCard.querySelector("time").datetime = todo.dueDate;
         newCard.querySelector("time").textContent = todo.dueDate;
-        if (Utils.isToday(todo.dueDate)) console.log("today!")
+      
         // Activates buttons functionality
+        const editButton = newCard.querySelector(".editButton");
+        editButton.onclick = () => Form.init("edit", todo);
+
         const deleteButton = newCard.querySelector(".deleteButton");
         deleteButton.onclick = () => this.deleteTodo(todo, newCard);
 

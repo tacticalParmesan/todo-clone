@@ -64,4 +64,10 @@ export class Sidebar {
             projectsList.appendChild(tab);
         }
     }
+
+    static checkForToday(todo) {
+        if (isToday(todo.dueDate)) {
+            Sidebar.showTodayTodos();
+        }
+    }
 }
