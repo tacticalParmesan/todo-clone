@@ -139,6 +139,37 @@
             </dialog>
             <!-- #endregion -->
         </main>
+        <!-- #region Templates -->
+        <div id="templates" style="display: none">
+            <li class="todoTemplate" uid="">
+                <input type="checkbox" class="doneCheck" />
+                <div class="todoInfoTab">
+                    <h2 class="todoTitle">Title</h2>
+                    <p class="todoDesc">Description</p>
+                </div>
+                <div class="rightTab">
+                    <div class="buttonsTab">
+                        <button class="todoButton editButton">
+                            <span class="material-symbols-outlined"
+                                >edit</span
+                            ></button
+                        ><button class="todoButton deleteButton">
+                            <span class="material-symbols-outlined"
+                                >delete</span
+                            >
+                        </button>
+                    </div>
+                    <div class="todoDateProjectTab">
+                        <time datetime="9/8/2024">Date</time>
+                        <p class="todoProject">Project</p>
+                    </div>
+                </div>
+            </li>
+            <li class="tab projectTab" id="projectTabTemplate">
+                <span class="material-symbols-outlined">tactic</span>
+                <p class="projectName">Project Name</p>
+            </li>
+        </div>
     </body>
     <script src="main.js"></script>
 </html>
