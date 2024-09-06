@@ -54,7 +54,7 @@ export class Store {
             const loadedProject = this.loadProject(project);
             allTodos = [...loadedProject.getTodosList()];
         }
-        console.log(allTodos);
+
         return allTodos;
     }
 

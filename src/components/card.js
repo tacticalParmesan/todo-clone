@@ -84,8 +84,9 @@ export class Card {
         newCard.querySelector(".todoProject").textContent = Utils.toTitleCase(
             todo.project
         );
+        newCard.querySelector("time").datetime = todo.dueDate;
         newCard.querySelector("time").textContent = todo.dueDate;
-
+        if (Utils.isToday(todo.dueDate)) console.log("today!")
         // Activates buttons functionality
         const deleteButton = newCard.querySelector(".deleteButton");
         deleteButton.onclick = () => this.deleteTodo(todo, newCard);

@@ -2,6 +2,7 @@ import { Gui } from "../modules/gui";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
 import { Form } from "./form";
+import { isToday } from "date-fns";
 
 export class Sidebar {
     constructor() {}
@@ -17,13 +18,17 @@ export class Sidebar {
     static init() {
         const addTodoButton = document.querySelector("#addTodoButton")
         addTodoButton.onclick = () => Form.init()
-    }
 
-    static showNewTodoModal() {}
+        this.showTodayTodos()
+    }
 
     static foldSidebar() {}
 
-    static showTodayTodos() {}
+    static showTodayTodos() {
+        const todayNumber = document.querySelector("#todoNumber")
+        const todayTodos = Store.loadAllTodos().filter((todo) => isToday(todo.dueDate))
+        todayNumber.textContent = todayTodos.length
+    }
 
     /**
      * Clears the Project list in the sidebar panel by wiping
@@ -45,7 +50,7 @@ export class Sidebar {
         const projectsList = document.querySelector("#projectList");
         const template = document.querySelector("#projectTabTemplate")
         this.clearProjects();
-        
+
         for (const project of Object.keys(localStorage)) {
             if (project === "general") {
                 continue;

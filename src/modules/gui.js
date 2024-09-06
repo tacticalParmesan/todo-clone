@@ -59,8 +59,8 @@ export class Gui {
      */
     static switchProject(target) {
         this.currentProject = target;
-        this.renderProject(target);
         this.checkForEmptyProject();
+        this.renderProject(target);
     }
 
     static renderFiltered(property, value) {}

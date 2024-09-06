@@ -17,7 +17,7 @@ export default class Todo {
     constructor(title, description, dueDate, priority, projectName) {
         this.title = title;
         this.description = description;
-        this.dueDate = new Date(dueDate);
+        this.dueDate = format(new Date(dueDate), "d MMM yyyy")
         this.priority = priority;
         this.project = projectName;
     }
@@ -45,12 +45,11 @@ export default class Todo {
     }
 
     get dueDate() {
-        const date = this._dueDate;
-        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+        return this._dueDate;
     }
 
     set dueDate(value) {
-        this._dueDate = value instanceof Date ? value : this._dueDate;
+        this._dueDate = value;
     }
 
     get priority() {

@@ -1,3 +1,5 @@
+
+
 /**
  * A collection of useful method that are shared between different
  * components of the App but do not belong to a single component.
@@ -52,5 +54,16 @@ export class Utils {
             .split(/\s+/)
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
+    }
+
+    /**
+     * Checks if the passed date is today.
+     * @param {*} date 
+     * @returns 
+     */
+    static isToday(date) {
+        const today = new Date().toLocaleDateString();
+        const locDate = new Date(date).toLocaleDateString();
+        return (today === locDate) ? true : false
     }
 }

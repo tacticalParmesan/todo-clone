@@ -31,13 +31,10 @@ export class Logic {
             todoProperties.projectName
         );
 
-        if (project.name !== "general") {
-            project.add(newTodo);
-            console.info(
-                `Created todo '${newTodo.title}'. Added to project '${project.name}'.`
-            );
-        } else {
-        }
+        project.add(newTodo);
+        console.info(
+            `Created todo '${newTodo.title}'. Added to project '${project.name}'.`
+        );
 
         return newTodo;
     }
