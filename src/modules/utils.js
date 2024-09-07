@@ -1,5 +1,3 @@
-
-
 /**
  * A collection of useful method that are shared between different
  * components of the App but do not belong to a single component.

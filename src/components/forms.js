@@ -210,21 +210,25 @@ export class TodoForm {
      * @returns
      */
     static validateProject(project) {
-        return (project === "") ? "general" : project
+        return project === "" ? "general" : project;
     }
 
     /**
      * Defaults the priority to the lowest (4) if the user does not provide an input.
-     * @param {*} prio 
+     * @param {*} prio
      */
     static validatePriority(prio) {
-        return (prio === "") ? "4" : prio
+        return prio === "" ? "4" : prio;
     }
 }
 
 export class ProjectForm {
     dialog;
 
+    /**
+     * Initializes the project creation dialog by grabbin refereces to
+     * inputs and activates buttons and menus.
+     */
     static init() {
         this.dialog = document.querySelector("#projectForm");
         this.dialog.show();
@@ -239,6 +243,9 @@ export class ProjectForm {
         };
     }
 
+    /**
+     * Saves new project with data provided in the input form.
+     */
     static saveNewProject() {
         const newProject = Logic.createProject(
             this.dialog.querySelector("#projectName").value,

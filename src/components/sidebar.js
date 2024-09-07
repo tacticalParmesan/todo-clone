@@ -21,18 +21,18 @@ export class Sidebar {
      * elements and activates buttons,
      */
     static init() {
-        const addTodoButton = document.querySelector("#addTodoButton")
-        addTodoButton.onclick = () => TodoForm.init()
+        const addTodoButton = document.querySelector("#addTodoButton");
+        addTodoButton.onclick = () => TodoForm.init();
 
         const addProjectButton = document.querySelector("#addProject");
-        addProjectButton.onclick = () => ProjectForm.init()
+        addProjectButton.onclick = () => ProjectForm.init();
 
-        const inboxTab = document.querySelector("#inbox")
+        const inboxTab = document.querySelector("#inbox");
         inboxTab.onclick = () => {
-            Gui.switchProject(Store.loadProject("general"))
-        }
+            Gui.switchProject(Store.loadProject("general"));
+        };
 
-        this.showTodayTodos()
+        this.showTodayTodos();
     }
 
     static foldSidebar() {}
@@ -41,9 +41,11 @@ export class Sidebar {
      * Updates the number of today todos displayed in the Sidebar.
      */
     static showTodayTodos() {
-        const todayNumber = document.querySelector("#todoNumber")
-        const todayTodos = Store.loadAllTodos().filter((todo) => isToday(todo.dueDate))
-        todayNumber.textContent = todayTodos.length
+        const todayNumber = document.querySelector("#todoNumber");
+        const todayTodos = Store.loadAllTodos().filter((todo) =>
+            isToday(todo.dueDate)
+        );
+        todayNumber.textContent = todayTodos.length;
     }
 
     /**
@@ -64,7 +66,7 @@ export class Sidebar {
      */
     static showProjects() {
         const projectsList = document.querySelector("#projectList");
-        const template = document.querySelector("#projectTabTemplate")
+        const template = document.querySelector("#projectTabTemplate");
         this.clearProjects();
 
         for (const project of Object.keys(localStorage)) {
@@ -75,9 +77,11 @@ export class Sidebar {
             const tab = template.cloneNode(true);
             tab.id = project.toLowerCase();
 
-            tab.querySelector(".projectName").textContent = Utils.toTitleCase(project);
-            tab.querySelector("span").style.color = Store.loadProject(project).uicolor;
-            tab.onclick = () => Gui.switchProject(Store.loadProject(project))
+            tab.querySelector(".projectName").textContent =
+                Utils.toTitleCase(project);
+            tab.querySelector("span").style.color =
+                Store.loadProject(project).uicolor;
+            tab.onclick = () => Gui.switchProject(Store.loadProject(project));
             projectsList.appendChild(tab);
         }
     }
@@ -85,7 +89,7 @@ export class Sidebar {
     /**
      * Checks at the moment of creation and deletion if the number
      * of today todos in the Sidebar should be updated.
-     * @param {*} todo 
+     * @param {*} todo
      */
     static checkForToday(todo) {
         if (isToday(todo.dueDate)) {

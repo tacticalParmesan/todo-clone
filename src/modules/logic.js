@@ -46,6 +46,10 @@ export class Logic {
      * @param {*} todo
      */
     static deleteTodo(project, todo) {
+        console.log(project, todo);
+        if (!project.hasTodo(todo)) {
+            return;
+        }
         project.todos.splice(project.todos.indexOf(todo), 1);
         console.info(
             `Deleted todo '${todo.title}' from project '${project.name}'.`

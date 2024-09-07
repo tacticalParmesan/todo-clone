@@ -15,7 +15,7 @@ export default class Project {
     constructor(name, description, uicolor) {
         this.name = name.toLowerCase();
         this.description = description;
-        this.uicolor = uicolor
+        this.uicolor = uicolor;
     }
 
     /** Project class fields */
@@ -49,11 +49,11 @@ export default class Project {
     }
 
     get uicolor() {
-        return this._uicolor
+        return this._uicolor;
     }
 
     set uicolor(value) {
-        this._uicolor = value
+        this._uicolor = value;
     }
     //#endregion
 
@@ -86,7 +86,7 @@ export default class Project {
             description: this._description,
             todos: this.todos,
             complete: this.complete,
-            uicolor: this._uicolor
+            uicolor: this._uicolor,
         };
     }
 
