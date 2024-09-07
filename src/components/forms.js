@@ -92,12 +92,15 @@ export class TodoForm {
         const todoProperties = {
             title: this.dialog.querySelector("#formTitle").value,
             description: this.dialog.querySelector("#formDesc").value,
-            dueDate: format(
-                this.dialog.querySelector("#formDate").value,
-                "d MMM yyyy"
+            dueDate: this.validateDate(
+                this.dialog.querySelector("#formDate").value
             ),
-            priority: this.dialog.querySelector("#formPriority").value,
-            projectName: this.dialog.querySelector("#formProject").value,
+            priority: this.validatePriority(
+                this.dialog.querySelector("#formPriority").value
+            ),
+            projectName: this.validateProject(
+                this.dialog.querySelector("#formProject").value
+            ),
         };
 
         /**
@@ -118,6 +121,7 @@ export class TodoForm {
         }
 
         Sidebar.checkForToday(newTodo);
+        Gui.checkForEmptyProject();
     }
 
     /**
@@ -180,6 +184,41 @@ export class TodoForm {
                 selection.appendChild(newOption);
             }
         }
+    }
+
+    /**
+     * Defaults the date to today if user does not provide an input.
+     * @param {*} dateToValidate
+     * @returns
+     */
+    static validateDate(dateToValidate) {
+        let date;
+
+        try {
+            format(dateToValidate, "d MMM yyyy");
+        } catch (Error) {
+            {
+                date = format(new Date(), "d MMM yyyy");
+            }
+        }
+        return date;
+    }
+
+    /**
+     * Defaults the project to the default one if the user does not provide an input.
+     * @param {*} project
+     * @returns
+     */
+    static validateProject(project) {
+        return (project === "") ? "general" : project
+    }
+
+    /**
+     * Defaults the priority to the lowest (4) if the user does not provide an input.
+     * @param {*} prio 
+     */
+    static validatePriority(prio) {
+        return (prio === "") ? "4" : prio
     }
 }
 

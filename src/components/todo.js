@@ -14,10 +14,16 @@ import { Store } from "../modules/storage.js";
  * @param project
  */
 export default class Todo {
-    constructor(title, description, dueDate, priority, projectName) {
+    constructor(
+        title,
+        description,
+        dueDate = new Date(),
+        priority = "4",
+        projectName = "general"
+    ) {
         this.title = title;
         this.description = description;
-        this.dueDate = format(new Date(dueDate), "d MMM yyyy")
+        this.dueDate = format(new Date(dueDate), "d MMM yyyy");
         this.priority = priority;
         this.project = projectName;
     }

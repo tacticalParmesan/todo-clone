@@ -68,13 +68,14 @@ export class Card {
                 ? Gui.currentProject
                 : Store.loadProject(todo.project);
 
+        console.log(project, todo);
         Logic.deleteTodo(project, todo);
         document.querySelector("#todoView").removeChild(todoUI);
 
         Store.saveProject(project);
 
         Sidebar.checkForToday(todo);
-        Gui.checkForEmptyProject()
+        Gui.checkForEmptyProject();
     }
 
     /**
@@ -117,7 +118,7 @@ export class Card {
         const deleteButton = newCard.querySelector(".deleteButton");
         deleteButton.onclick = () => this.deleteTodo(todo, newCard);
 
-        Gui.checkForEmptyProject()
+        Gui.checkForEmptyProject();
 
         return newCard;
     }

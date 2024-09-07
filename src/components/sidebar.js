@@ -26,7 +26,12 @@ export class Sidebar {
 
         const addProjectButton = document.querySelector("#addProject");
         addProjectButton.onclick = () => ProjectForm.init()
-        
+
+        const inboxTab = document.querySelector("#inbox")
+        inboxTab.onclick = () => {
+            Gui.switchProject(Store.loadProject("general"))
+        }
+
         this.showTodayTodos()
     }
 
@@ -71,7 +76,7 @@ export class Sidebar {
             tab.id = project.toLowerCase();
 
             tab.querySelector(".projectName").textContent = Utils.toTitleCase(project);
-            tab.querySelector(".material-symbols-outlined").style.color = project.uicolor;
+            tab.querySelector("span").style.color = Store.loadProject(project).uicolor;
             tab.onclick = () => Gui.switchProject(Store.loadProject(project))
             projectsList.appendChild(tab);
         }

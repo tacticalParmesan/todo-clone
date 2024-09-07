@@ -62,8 +62,8 @@ export class Gui {
      */
     static switchProject(target) {
         this.currentProject = target;
-        this.checkForEmptyProject();
         this.renderProject(target);
+        this.checkForEmptyProject();
     }
 
     static renderFiltered(property, value) {}
@@ -74,7 +74,10 @@ export class Gui {
      */
     static checkForEmptyProject() {
         const empty = document.querySelector("#emptyProjectScreen");
-        if (document.querySelector("#todoView").firstChild) {
+
+        const todoView = document.querySelector("#todoView")
+
+        if (todoView.firstChild) {          
             empty.style.display = "none";
         } else {
             empty.style.display = "flex";

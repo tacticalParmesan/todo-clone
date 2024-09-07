@@ -47,6 +47,14 @@ export default class Project {
         if (Utils.isValidString("description", value))
             this._description = value;
     }
+
+    get uicolor() {
+        return this._uicolor
+    }
+
+    set uicolor(value) {
+        this._uicolor = value
+    }
     //#endregion
 
     //#region Project methods
@@ -78,7 +86,7 @@ export default class Project {
             description: this._description,
             todos: this.todos,
             complete: this.complete,
-            uicolor: this.uicolor
+            uicolor: this._uicolor
         };
     }
 
@@ -87,7 +95,7 @@ export default class Project {
      */
     static fromJSON(json) {
         const obj = JSON.parse(json);
-        const project = new Project(obj.name, obj.description);
+        const project = new Project(obj.name, obj.description, obj.uicolor);
 
         if (obj.complete) project.toggleStatus();
 
