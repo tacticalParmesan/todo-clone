@@ -42,7 +42,10 @@ export class Gui {
     static renderProject(project) {
         const projectName = document.querySelector("#projectName");
         const todoView = document.querySelector("#todoView");
-        const todoList = project.getTodosList();
+        const todoList =
+            project.name != "general"
+                ? project.getTodosList()
+                : Store.loadAllTodos();
 
         this.clearTodoView();
         projectName.textContent = Utils.toTitleCase(project.name);
@@ -71,10 +74,10 @@ export class Gui {
      */
     static checkForEmptyProject() {
         const empty = document.querySelector("#emptyProjectScreen");
-        if (!this.currentProject.getTodosList()[0]) {
-            empty.style.display = "flex";
-        } else {
+        if (document.querySelector("#todoView").firstChild) {
             empty.style.display = "none";
+        } else {
+            empty.style.display = "flex";
         }
     }
 }

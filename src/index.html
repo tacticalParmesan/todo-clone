@@ -101,7 +101,7 @@
                 </div>
             </div>
             <!-- #endregion -->
-            <!-- #region Form -->
+            <!-- #region Todo Form -->
             <dialog id="todoDialog">
                 <form action="" id="todoForm">
                     <div id="upperPanel">
@@ -120,14 +120,15 @@
                     </div>
                     <div id="formOptions">
                         <input type="date" name="" id="formDate" />
-                        <select name="" id="formPriority">
+                        <select name="" id="formPriority" required>
+                            <option value="" selected>Priority</option>
                             <option value="1">Priority 1</option>
                             <option value="2">Priority 2</option>
                             <option value="3">Priority 3</option>
                             <option value="4">Priority 4</option>
                         </select>
                         <select name="" id="formProject">
-                            <option value="general" selected>General</option>
+                            <option value="" selected>Project</option>
                         </select>
                     </div>
                     <div id="lowerPanel">
@@ -135,6 +136,19 @@
                         <button id="saveTodo">Add todo</button>
                     </div>
                 </form>
+            </dialog>
+            <!-- #endregion -->
+            <!-- #region Project Form -->
+            <dialog id="projectForm">
+                <div id="projectDetails">
+                    <input type="text" name="projectName" id="projectName" placeholder="Name of Project">
+                    <textarea name="" id="projectDesc">Briefly describe your project.</textarea>
+                    <input type="color" name="" id="projectColor">
+                </div>
+                <div id="buttonsTab">
+                    <button id="closeProjectForm" class="closeButton">Close</button>
+                    <button id="saveProject">Add Project</button>
+                </div>
             </dialog>
             <!-- #endregion -->
         </main>
@@ -159,7 +173,7 @@
                         </button>
                     </div>
                     <div class="todoDateProjectTab">
-                        <time datetime="9/8/2024" prop="dueDate">Date</time>
+                        <time datetime="" prop="dueDate">Date</time>
                         <p class="todoProject" prop="project">Project</p>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-dialog[open] {
+dialog#todoDialog[open] {
     top: 20%;
     justify-self: center;
     z-index: 1;

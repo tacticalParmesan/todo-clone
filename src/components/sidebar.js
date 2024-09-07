@@ -1,7 +1,7 @@
 import { Gui } from "../modules/gui";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
-import { Form } from "./form";
+import { ProjectForm, TodoForm } from "./forms";
 import { isToday } from "date-fns";
 
 export class Sidebar {
@@ -22,8 +22,11 @@ export class Sidebar {
      */
     static init() {
         const addTodoButton = document.querySelector("#addTodoButton")
-        addTodoButton.onclick = () => Form.init()
+        addTodoButton.onclick = () => TodoForm.init()
 
+        const addProjectButton = document.querySelector("#addProject");
+        addProjectButton.onclick = () => ProjectForm.init()
+        
         this.showTodayTodos()
     }
 
@@ -68,6 +71,7 @@ export class Sidebar {
             tab.id = project.toLowerCase();
 
             tab.querySelector(".projectName").textContent = Utils.toTitleCase(project);
+            tab.querySelector(".material-symbols-outlined").style.color = project.uicolor;
             tab.onclick = () => Gui.switchProject(Store.loadProject(project))
             projectsList.appendChild(tab);
         }

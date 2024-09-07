@@ -10,9 +10,7 @@ import { Card } from "./card";
  * Interface for getting and manipulation data about a todo.
  * Handles static and interactive elements of the Todo dialog.
  */
-export class Form {
-    constructor() {}
-
+export class TodoForm {
     dialog;
     inputs = {};
 
@@ -52,6 +50,11 @@ export class Form {
      * Opens todo form in creation mode.
      */
     static openForCreation() {
+        this.clearForm();
+
+        this.inputs.project.value =
+            Gui.currentProject.name != "general" ? Gui.currentProject.name : "";
+
         this.dialog.querySelector("#saveTodo").onclick = (e) => {
             e.preventDefault();
             this.saveNewTodo();
@@ -139,11 +142,21 @@ export class Form {
                 );
                 Card.editTodoUI(
                     [property, newValue],
-                    document.querySelector(`[uid=${todo.getUid()}]`)
+                    document.querySelector(`[uid="${todo.getUid()}"]`)
                 );
             }
         }
         Store.saveProject(projectToUpdate);
+    }
+
+    /**
+     * Resets form values to default since the editing mode
+     * overwrites them.
+     */
+    static clearForm() {
+        for (const input of Object.keys(this.inputs)) {
+            this.inputs[input].value = "";
+        }
     }
 
     /**
@@ -154,12 +167,47 @@ export class Form {
 
         for (const project of Object.keys(localStorage)) {
             // Skips the rendering of "general", reserved for "Inbox" tab
-            if (project === "general") continue;
 
             const newOption = document.createElement("option");
             newOption.value = project.toLowerCase();
             newOption.textContent = Utils.toTitleCase(project);
-            selection.appendChild(newOption);
+
+            if (
+                !selection.contains(
+                    document.querySelector(`option[value="${newOption.value}"]`)
+                )
+            ) {
+                selection.appendChild(newOption);
+            }
         }
+    }
+}
+
+export class ProjectForm {
+    dialog;
+
+    static init() {
+        this.dialog = document.querySelector("#projectForm");
+        this.dialog.show();
+
+        this.dialog.querySelector("#closeProjectForm").onclick = () => {
+            this.dialog.close();
+        };
+
+        this.dialog.querySelector("#saveProject").onclick = () => {
+            this.saveNewProject();
+            this.dialog.close();
+        };
+    }
+
+    static saveNewProject() {
+        const newProject = Logic.createProject(
+            this.dialog.querySelector("#projectName").value,
+            this.dialog.querySelector("#projectDesc").value,
+            this.dialog.querySelector("#projectColor").value
+        );
+
+        Store.saveProject(newProject);
+        Sidebar.showProjects();
     }
 }

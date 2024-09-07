@@ -84,9 +84,9 @@ export class Logic {
      * @param {*} description
      * @returns An instance of the new Project
      */
-    static createProject(name, description) {
+    static createProject(name, description, color) {
         if (!Store.doProjectExist(name)) {
-            const newProject = new Project(name, description);
+            const newProject = new Project(name, description, color);
             console.info(`Created project '${name}'.`);
             return newProject;
         } else {

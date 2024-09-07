@@ -52,7 +52,7 @@ export class Store {
         let allTodos = [];
         for (const project of Object.keys(localStorage)) {
             const loadedProject = this.loadProject(project);
-            allTodos = [...loadedProject.getTodosList()];
+            allTodos.push(...loadedProject.getTodosList());
         }
 
         return allTodos;
