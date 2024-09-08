@@ -21,6 +21,8 @@ export class Sidebar {
      * elements and activates buttons,
      */
     static init() {
+        this.toggleTabSelection()
+
         const addTodoButton = document.querySelector("#addTodoButton");
         addTodoButton.onclick = () => TodoForm.init();
 
@@ -28,13 +30,14 @@ export class Sidebar {
         addProjectButton.onclick = () => ProjectForm.init();
 
         const inboxTab = document.querySelector("#inbox");
+        inboxTab.classList.toggle("current")
         inboxTab.onclick = () => {
             Gui.switchProject(Store.loadProject("general"));
         };
 
         const todayTab = document.querySelector("#today");
-        todayTab.onclick = () =>
-            Gui.renderFiltered("dueDate", format(new Date(), "d MMM yyyy"));
+        todayTab.onclick = () => Gui.renderFiltered("dueDate", format(new Date(), "d MMM yyyy"));
+
 
         this.updateTodayTodos();
     }
@@ -85,8 +88,21 @@ export class Sidebar {
                 Utils.toTitleCase(project);
             tab.querySelector("span").style.color =
                 Store.loadProject(project).uicolor;
-            tab.onclick = () => Gui.switchProject(Store.loadProject(project));
+            tab.onclick = () => {
+                Gui.switchProject(Store.loadProject(project));
+            }
             projectsList.appendChild(tab);
         }
+        this.toggleTabSelection()
+    }
+
+    static toggleTabSelection() {
+        const allSidebarTabs = document.querySelectorAll(".tab")
+        allSidebarTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                allSidebarTabs.forEach(t => t.classList.remove("current"))
+                tab.classList.toggle("current")
+            }) 
+        })
     }
 }

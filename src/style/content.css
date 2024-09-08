@@ -15,6 +15,33 @@
     height: 100%;
 }
 
+#upperContentPanel {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+
+    width: 100%;
+    padding: 0rem 2rem;
+}
+
+.editProject {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 1rem;
+}
+
+.editProject:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.040);
+    border-radius: 0.5rem;
+    transition: ease 0.1s;
+}
+
 #projectName {
     font-size: 2rem;
     margin-bottom: 1rem;
