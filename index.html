@@ -18,8 +18,11 @@
             <nav id="sidebar">
                 <section class="sidebarPanel" id="userPanel">
                     <div id="userInfo">
-                        <p id="userCircle">EF</p>
+                        <div class="circle">
+                            <p id="userCircle">EF</p>
+                        </div>
                         <p id="username">Username</p>
+                
                     </div>
                     <button id="foldButton">
                         <span class="material-symbols-outlined">
@@ -29,10 +32,12 @@
                 </section>
                 <section class="sidebarPanel" id="mainPanel">
                     <button id="addTodoButton">
-                        <span class="material-symbols-outlined">
-                            add_circle
-                        </span>
-                        <p>Add a task</p>
+                        <div class="circle">
+                            <span class="material-symbols-outlined">
+                                add
+                            </span>
+                        </div>
+                        <p>Add a new task</p>
                     </button>
                     <div class="tab" id="inbox">
                         <span class="material-symbols-outlined"> inbox </span>
@@ -45,9 +50,9 @@
                     </div>
                     <div class="tab" id="upcoming">
                         <span class="material-symbols-outlined">
-                            calendar_month
+                            tune
                         </span>
-                        <p class="panelText">Upcoming</p>
+                        <p class="panelText">Filters</p>
                     </div>
                 </section>
                 <section class="sidebarPanel" id="projectPanel">
@@ -58,24 +63,6 @@
                         </button>
                     </div>
                     <ol id="projectList">
-                        <li class="tab projectTab">
-                            <span class="material-symbols-outlined">
-                                tactic
-                            </span>
-                            <p class="projectName" id="nameof">Shopping</p>
-                        </li>
-                        <li class="tab projectTab">
-                            <span class="material-symbols-outlined">
-                                tactic
-                            </span>
-                            <p class="projectName" id="nameof">Housework</p>
-                        </li>
-                        <li class="tab projectTab">
-                            <span class="material-symbols-outlined">
-                                tactic
-                            </span>
-                            <p class="projectName" id="nameof">Work</p>
-                        </li>
                     </ol>
                 </section>
                 <button id="mdb">MAGIC DEBUG BUTTON</button>
@@ -84,7 +71,23 @@
             <!-- #region Content Area -->
             <div id="content">
                 <div id="content-view">
-                    <h2 id="projectName">Project Name</h2>
+                    <div id="upperContentPanel">
+                        <h2 id="projectName">Project Name</h2>
+                        <button class="editProject">
+                            <span class="material-symbols-outlined">
+                                brush
+                            </span>
+                        </button>
+                    </div>
+                    <hr>
+                    <div id="filterSelectionPanel" hidden>
+                            <select name="" id="prop">
+                                <option value="" selected disabled>Property</option>
+                                <option value="dueDate">Date</option>
+                                <option value="priority">Priority</option>
+                            </select>
+                            <input type="text" id="value">
+                    </div>
                     <ol id="todoView"></ol>
                     <div class="hidden" id="emptyProjectScreen">
                         <img
@@ -132,6 +135,7 @@
                             <option value="" selected>Project</option>
                         </select>
                     </div>
+                    <hr>
                     <div id="lowerPanel">
                         <button id="closeForm">Close</button>
                         <button id="saveTodo">Add todo</button>
@@ -174,7 +178,13 @@
                         </button>
                     </div>
                     <div class="todoDateProjectTab">
-                        <time datetime="" prop="dueDate">Date</time>
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <time datetime="" prop="dueDate">
+                            Date</time>
+                            <hr>
+                            <span class="material-symbols-outlined projectSymbol">tactic</span>
+                        
+
                         <p class="todoProject" prop="project">Project</p>
                     </div>
                 </div>
@@ -182,6 +192,11 @@
             <li class="tab projectTab" id="projectTabTemplate">
                 <span class="material-symbols-outlined">tactic</span>
                 <p class="projectName">Project Name</p>
+                <button class="options">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </button>
             </li>
         </div>
     </body>
