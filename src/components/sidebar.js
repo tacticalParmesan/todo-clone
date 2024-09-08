@@ -32,7 +32,7 @@ export class Sidebar {
             Gui.switchProject(Store.loadProject("general"));
         };
 
-        this.showTodayTodos();
+        this.updateTodayTodos();
     }
 
     static foldSidebar() {}
@@ -40,7 +40,7 @@ export class Sidebar {
     /**
      * Updates the number of today todos displayed in the Sidebar.
      */
-    static showTodayTodos() {
+    static updateTodayTodos() {
         const todayNumber = document.querySelector("#todoNumber");
         const todayTodos = Store.loadAllTodos().filter((todo) =>
             isToday(todo.dueDate)
@@ -86,14 +86,5 @@ export class Sidebar {
         }
     }
 
-    /**
-     * Checks at the moment of creation and deletion if the number
-     * of today todos in the Sidebar should be updated.
-     * @param {*} todo
-     */
-    static checkForToday(todo) {
-        if (isToday(todo.dueDate)) {
-            Sidebar.showTodayTodos();
-        }
-    }
+
 }

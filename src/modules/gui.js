@@ -80,4 +80,9 @@ export class Gui {
             empty.style.display = "flex";
         }
     }
+
+    static update() {
+        Sidebar.updateTodayTodos()
+        this.checkForEmptyProject()
+    }
 }

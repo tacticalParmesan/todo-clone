@@ -120,8 +120,7 @@ export class TodoForm {
             Gui.renderProject(Gui.currentProject);
         }
 
-        Sidebar.checkForToday(newTodo);
-        Gui.checkForEmptyProject();
+        Gui.update()
     }
 
     /**
@@ -167,6 +166,8 @@ export class TodoForm {
 
         // Check to avoid saving two times and provoke a cloning behaviour.
         if (!hasProjectChanged) Store.saveProject(projectToUpdate);
+
+        Gui.update()
     }
 
     /**

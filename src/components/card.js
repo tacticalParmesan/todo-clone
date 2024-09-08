@@ -118,7 +118,7 @@ export class Card {
         const deleteButton = newCard.querySelector(".deleteButton");
         deleteButton.onclick = () => this.deleteTodo(todo, newCard);
 
-        Gui.checkForEmptyProject();
+        Gui.update()
 
         return newCard;
     }
