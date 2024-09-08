@@ -2,7 +2,7 @@ import { Gui } from "../modules/gui";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
 import { ProjectForm, TodoForm } from "./forms";
-import { isToday } from "date-fns";
+import { isToday, format } from "date-fns";
 
 export class Sidebar {
     constructor() {}
@@ -31,6 +31,10 @@ export class Sidebar {
         inboxTab.onclick = () => {
             Gui.switchProject(Store.loadProject("general"));
         };
+
+        const todayTab = document.querySelector("#today");
+        todayTab.onclick = () =>
+            Gui.renderFiltered("dueDate", format(new Date(), "d MMM yyyy"));
 
         this.updateTodayTodos();
     }
@@ -85,6 +89,4 @@ export class Sidebar {
             projectsList.appendChild(tab);
         }
     }
-
-
 }

@@ -74,8 +74,8 @@ export class Card {
         Logic.deleteTodo(project, todo);
         Store.saveProject(project);
 
-        Sidebar.checkForToday(todo);
-        Gui.checkForEmptyProject();
+        Gui.update()
+        Gui.checkIfFiltered()
     }
 
     /**

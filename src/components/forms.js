@@ -121,6 +121,8 @@ export class TodoForm {
         }
 
         Gui.update()
+        Gui.checkIfFiltered()
+
     }
 
     /**
@@ -168,6 +170,7 @@ export class TodoForm {
         if (!hasProjectChanged) Store.saveProject(projectToUpdate);
 
         Gui.update()
+        Gui.checkIfFiltered()
     }
 
     /**
@@ -237,6 +240,8 @@ export class TodoForm {
     static validatePriority(prio) {
         return prio === "" ? "4" : prio;
     }
+
+
 }
 
 export class ProjectForm {

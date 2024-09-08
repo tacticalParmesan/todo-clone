@@ -12,10 +12,11 @@ import Todo from "./todo";
  * @param description
  */
 export default class Project {
-    constructor(name, description, uicolor) {
+    constructor(name, description, uicolor = "black", filtered = null) {
         this.name = name.toLowerCase();
         this.description = description;
         this.uicolor = uicolor;
+        this.filtered = filtered
     }
 
     /** Project class fields */

@@ -2,6 +2,7 @@ import { Utils } from "./utils";
 import { Store } from "./storage";
 import { Card } from "../components/card";
 import { Sidebar } from "../components/sidebar";
+import Project from "../components/project";
 
 export class Gui {
     constructor() {}
@@ -63,7 +64,27 @@ export class Gui {
         this.checkForEmptyProject();
     }
 
-    static renderFiltered(property, value) {}
+    /**
+     * Creates a temporary project to store filtered todos and render them
+     * in the dedicated tab. Checks for property and value.
+     * @param {*} property 
+     * @param {*} value 
+     */
+    static renderFiltered(property, value) {
+        const filterName = Utils.toTitleCase(property);
+        const filteredTodos = Store.loadAllTodos().filter(
+            (todo) => todo[property] === value
+        );
+
+        const tempProject = new Project(
+            `${filterName}: ${value}`,
+            "Filtered view.",
+            "black",
+            [property, value]
+        );
+        filteredTodos.map((todo) => tempProject.add(todo));
+        this.switchProject(tempProject);
+    }
 
     /**
      * Checks if the currently displayed project is empty and shows
@@ -81,8 +102,24 @@ export class Gui {
         }
     }
 
+    /**
+     * Checks if the current viewed project is a temporary "filter"
+     * project and in that case filters again to update displayed values.
+     */
+    static checkIfFiltered() {
+        const project = this.currentProject;
+        
+        if (Array.isArray(project.filtered)) {
+            this.renderFiltered(project.filtered.at(0), project.filtered[1]);
+        }
+    }
+
+    /**
+     * Updates dynamic UI elements like counters and panle that should be
+     * hidden or visibile based on Todo state.
+     */
     static update() {
-        Sidebar.updateTodayTodos()
-        this.checkForEmptyProject()
+        Sidebar.updateTodayTodos();
+        this.checkForEmptyProject();
     }
 }
