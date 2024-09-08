@@ -67,8 +67,8 @@ export default class Project {
     }
 
     hasTodo(todo) {
-        if (!this.todos.includes(todo)) {
-            console.error(`Todo is not inside project '${this.name}.'`);
+        if (!this.todos.find((item) => item.getUid() === todo.getUid())) {
+            console.error(`Todo is not inside project '${this.name}'.`);
             return false;
         }
         return true;

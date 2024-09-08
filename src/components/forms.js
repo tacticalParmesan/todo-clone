@@ -130,27 +130,43 @@ export class TodoForm {
      * @param {*} todo
      */
     static saveTodoChanges(todo) {
+        const todoUI = document.querySelector(`[uid="${todo.getUid()}"]`);
+        const todoView = document.querySelector("#todoView");
+
         const projectToUpdate =
             Gui.currentProject.name === todo.project
                 ? Gui.currentProject
                 : Store.loadProject(todo.project);
 
+        let hasProjectChanged;
+
+        /**
+         * If a property has changed with user input it will get
+         * updated. This includes swapping todos between projects.
+         */
         for (const property of Object.keys(this.inputs)) {
             const newValue = this.inputs[property].value;
-            if (newValue !== todo[property]) {
+            const oldValue = todo[property];
+
+            if (newValue !== oldValue) {
                 Logic.editTodo(
                     projectToUpdate,
                     todo,
                     property,
                     this.inputs[property].value
                 );
-                Card.editTodoUI(
-                    [property, newValue],
-                    document.querySelector(`[uid="${todo.getUid()}"]`)
-                );
+                Card.editTodoUI([property, newValue], todoUI);
+
+                if (property === "project") {
+                    Logic.moveTodo(oldValue, newValue, todo);
+                    hasProjectChanged = true;
+                    todoView.removeChild(todoUI);
+                }
             }
         }
-        Store.saveProject(projectToUpdate);
+
+        // Check to avoid saving two times and provoke a cloning behaviour.
+        if (!hasProjectChanged) Store.saveProject(projectToUpdate);
     }
 
     /**

@@ -69,9 +69,9 @@ export class Card {
                 : Store.loadProject(todo.project);
 
         console.log(project, todo);
-        Logic.deleteTodo(project, todo);
         document.querySelector("#todoView").removeChild(todoUI);
 
+        Logic.deleteTodo(project, todo);
         Store.saveProject(project);
 
         Sidebar.checkForToday(todo);

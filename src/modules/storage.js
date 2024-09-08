@@ -16,12 +16,10 @@ export class Store {
      * Saves a project in localStorage using the localStorage API.
      * @param {*} project
      */
-    static saveProject(...projects) {
-        for (const project of projects) {
-            if (project instanceof Project) {
-                localStorage.setItem(project.name, JSON.stringify(project));
-                console.info(`Saved project ${project.name} in storage.`);
-            }
+    static saveProject(project) {
+        if (project instanceof Project) {
+            localStorage.setItem(project.name, JSON.stringify(project));
+            console.info(`Saved project ${project.name} in storage.`);
         }
     }
 

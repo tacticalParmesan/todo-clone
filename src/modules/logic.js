@@ -41,16 +41,19 @@ export class Logic {
 
     /**
      * Deletes the provided Todo element from the Project array.
-     * Checks for Todo existince inside Project.
+     * Checks for Todo existence inside Project.
      * @param {*} project
      * @param {*} todo
      */
     static deleteTodo(project, todo) {
-        console.log(project, todo);
         if (!project.hasTodo(todo)) {
             return;
         }
-        project.todos.splice(project.todos.indexOf(todo), 1);
+        const indexToDelete = project.todos.findIndex(
+            (t) => t.getUid() === todo.getUid()
+        );
+        project.todos.splice(indexToDelete, 1);
+        console.log(project.getTodosList());
         console.info(
             `Deleted todo '${todo.title}' from project '${project.name}'.`
         );
@@ -70,11 +73,35 @@ export class Logic {
         if (!project.hasTodo(todo)) {
             return;
         }
-        const target = project.todos.find((item) => item === todo);
+        const target = project.todos.find(
+            (item) => item.getUid() === todo.getUid()
+        );
         const oldValue = target[property];
         if (property in todo) target[property] = value;
         console.info(
             `Edited todo '${todo.title}' inside project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`
+        );
+    }
+
+    /**
+     * Moves a Todo object from source project to target project.
+     * @param {*} source
+     * @param {*} target
+     * @param {*} todo
+     */
+    static moveTodo(source, target, todo) {
+        const from = Store.loadProject(source);
+        const to = Store.loadProject(target);
+
+        this.deleteTodo(from, todo);
+        Store.saveProject(from);
+        console.log(localStorage);
+
+        to.add(todo);
+        Store.saveProject(to);
+
+        console.info(
+            `Moved todo ${todo.title} from '${from.name} to '${to.name}'`
         );
     }
 
