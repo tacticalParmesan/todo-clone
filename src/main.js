@@ -6,6 +6,7 @@ import { Sidebar } from "./components/sidebar";
 import "./style/main.css";
 import { Card } from "./components/card";
 import { isToday } from "date-fns";
+import { ProjectForm } from "./components/forms";
 
 /**
  * Handles startup of the Todo app by loading event listeners

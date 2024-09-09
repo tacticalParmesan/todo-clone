@@ -244,38 +244,65 @@ export class TodoForm {
 
 }
 
-export class ProjectForm {
-    dialog;
-
+export const ProjectForm = (() => {
+    
+    const dialog = {
+        modal:         document.querySelector("#projectForm"),
+        closebtn:      document.querySelector("#closeProjectForm"),
+        savebtn:       document.querySelector("#saveProject"),
+        name:          document.querySelector("#projectFormName"),
+        description:   document.querySelector("#projectDesc"),
+        color:         document.querySelector("#projectColor"),
+        circle:        document.querySelector("#colorCircle")
+    };
+    
     /**
      * Initializes the project creation dialog by grabbin refereces to
      * inputs and activates buttons and menus.
      */
-    static init() {
-        this.dialog = document.querySelector("#projectForm");
-        this.dialog.show();
+    function init() {
+        dialog.modal.show();
+        dialog.closebtn.onclick = () => closeModal();
+        dialog.savebtn.onclick = () => saveNewProject();
+        dialog.color.onchange = () => updateColorCircle(dialog.color.value)
+    }
 
-        this.dialog.querySelector("#closeProjectForm").onclick = () => {
-            this.dialog.close();
-        };
+    /**
+     * Closes the project modal and resets field values.
+     */
+    function closeModal() {
+        dialog.modal.close();
+        resetForm();
+    }
 
-        this.dialog.querySelector("#saveProject").onclick = () => {
-            this.saveNewProject();
-            this.dialog.close();
-        };
+    /**
+     * Reset field values.
+     */
+    function resetForm() {        
+        [dialog.name, dialog.description, dialog.color].forEach(
+            (field) => {field.value = ""})
     }
 
     /**
      * Saves new project with data provided in the input form.
      */
-    static saveNewProject() {
+    function saveNewProject() {
+
         const newProject = Logic.createProject(
-            this.dialog.querySelector("#projectName").value,
-            this.dialog.querySelector("#projectDesc").value,
-            this.dialog.querySelector("#projectColor").value
+            dialog.name.value,
+            dialog.description.value,
+            dialog.color.value
         );
 
+        closeModal();
+        
         Store.saveProject(newProject);
         Sidebar.showProjects();
     }
-}
+
+    function updateColorCircle(color) {
+        dialog.circle.style.backgroundColor = color;
+    }
+
+    return { init }
+})();
