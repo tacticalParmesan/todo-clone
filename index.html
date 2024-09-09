@@ -22,7 +22,6 @@
                             <p id="userCircle">EF</p>
                         </div>
                         <p id="username">Username</p>
-                
                     </div>
                     <button id="foldButton">
                         <span class="material-symbols-outlined">
@@ -33,9 +32,7 @@
                 <section class="sidebarPanel" id="mainPanel">
                     <button id="addTodoButton">
                         <div class="circle">
-                            <span class="material-symbols-outlined">
-                                add
-                            </span>
+                            <span class="material-symbols-outlined"> add </span>
                         </div>
                         <p>Add a new task</p>
                     </button>
@@ -49,9 +46,7 @@
                         <p class="panelText" id="todoNumber">N</p>
                     </div>
                     <div class="tab" id="upcoming">
-                        <span class="material-symbols-outlined">
-                            tune
-                        </span>
+                        <span class="material-symbols-outlined"> tune </span>
                         <p class="panelText">Filters</p>
                     </div>
                 </section>
@@ -62,8 +57,7 @@
                             <span class="material-symbols-outlined"> add </span>
                         </button>
                     </div>
-                    <ol id="projectList">
-                    </ol>
+                    <ol id="projectList"></ol>
                 </section>
                 <button id="mdb">MAGIC DEBUG BUTTON</button>
             </nav>
@@ -79,14 +73,14 @@
                             </span>
                         </button>
                     </div>
-                    <hr>
+                    <hr />
                     <div id="filterSelectionPanel" hidden>
-                            <select name="" id="prop">
-                                <option value="" selected disabled>Property</option>
-                                <option value="dueDate">Date</option>
-                                <option value="priority">Priority</option>
-                            </select>
-                            <input type="text" id="value">
+                        <select name="" id="prop">
+                            <option value="" selected disabled>Property</option>
+                            <option value="dueDate">Date</option>
+                            <option value="priority">Priority</option>
+                        </select>
+                        <input type="text" id="value" />
                     </div>
                     <ol id="todoView"></ol>
                     <div class="hidden" id="emptyProjectScreen">
@@ -105,7 +99,9 @@
                 </div>
             </div>
             <!-- #endregion -->
+
             <!-- #region Todo Form -->
+            <!-- Form used for adding and editing todos -->
             <dialog id="todoDialog">
                 <form action="" id="todoForm">
                     <div id="upperPanel">
@@ -114,7 +110,8 @@
                             name=""
                             id="formTitle"
                             placeholder="Todo name"
-                        required />
+                            required
+                        />
                         <input
                             type="text"
                             name=""
@@ -123,7 +120,7 @@
                         />
                     </div>
                     <div id="formOptions">
-                        <input type="date" name="" id="formDate" required/>
+                        <input type="date" name="" id="formDate" required />
                         <select name="" id="formPriority" required>
                             <option value="" selected>Priority</option>
                             <option value="1">Priority 1</option>
@@ -135,7 +132,7 @@
                             <option value="" selected>Project</option>
                         </select>
                     </div>
-                    <hr>
+                    <hr />
                     <div id="lowerPanel">
                         <button id="closeForm">Close</button>
                         <button id="saveTodo">Add todo</button>
@@ -143,21 +140,61 @@
                 </form>
             </dialog>
             <!-- #endregion -->
+
             <!-- #region Project Form -->
+            <!-- Form used to add and edit projects -->
             <dialog id="projectForm">
                 <div id="projectDetails">
-                    <input type="text" name="projectName" id="projectName" placeholder="Name of Project">
-                    <textarea name="" id="projectDesc">Briefly describe your project.</textarea>
-                    <input type="color" name="" id="projectColor">
+                    <input
+                        type="text"
+                        name="projectName"
+                        id="projectFormName"
+                        placeholder="Name of Project"
+                    />
+                    <textarea
+                        name=""
+                        id="projectDesc"
+                        placeholder="Briefly describe your project."
+                    ></textarea>
+                    <div id="colorSection">
+                        <select name="" id="projectColor">
+                            <option value="" selected disabled>Pick a color</option>
+                            <option value="#e63946">Crimson Red</option>
+                            <option value="#f4a261">Tangerine</option>
+                            <option value="#2a9d8f">Teal Green</option>
+                            <option value="#e9c46a">Golden Yellow</option>
+                            <option value="#f77f00">Pumpkin Orange</option>
+                            <option value="#9b5de5">Amethyst Purple</option>
+                            <option value="#ff6b6b">Coral Red</option>
+                            <option value="#06d6a0">Mint Green</option>
+                            <option value="#ffbe0b">Sunflower Yellow</option>
+                            <option value="#8338ec">Violet</option>
+                            <option value="#fb5607">Burnt Orange</option>
+                            <option value="#3a86ff">Electric Blue</option>
+                            <option value="#ff006e">Magenta</option>
+                            <option value="#80ed99">Pistachio Green</option>
+                            <option value="#ffcc29">Amber Yellow</option>
+                            <option value="#e07a5f">Clay Red</option>
+                            <option value="#d4a5a5">Dusty Pink</option>
+                            <option value="#bc4749">Rust Red</option>
+                            <option value="#a8dadc">Pale Blue</option>
+                            <option value="#ffd166">Light Mustard</option>
+                        </select>
+                        <div id="colorCircle"></div>
+                    </div>
                 </div>
                 <div id="buttonsTab">
-                    <button id="closeProjectForm" class="closeButton">Close</button>
+                    <button id="closeProjectForm" class="closeButton">
+                        Close
+                    </button>
                     <button id="saveProject">Add Project</button>
                 </div>
             </dialog>
             <!-- #endregion -->
         </main>
+
         <!-- #region Templates -->
+        <!-- Templates for componenets -->
         <div id="templates" style="display: none">
             <li class="todoTemplate" uid="">
                 <input type="checkbox" class="doneCheck" />
@@ -178,12 +215,14 @@
                         </button>
                     </div>
                     <div class="todoDateProjectTab">
-                        <span class="material-symbols-outlined">calendar_month</span>
-                        <time datetime="" prop="dueDate">
-                            Date</time>
-                            <hr>
-                            <span class="material-symbols-outlined projectSymbol">tactic</span>
-                        
+                        <span class="material-symbols-outlined"
+                            >calendar_month</span
+                        >
+                        <time datetime="" prop="dueDate"> Date</time>
+                        <hr />
+                        <span class="material-symbols-outlined projectSymbol"
+                            >tactic</span
+                        >
 
                         <p class="todoProject" prop="project">Project</p>
                     </div>
@@ -193,9 +232,7 @@
                 <span class="material-symbols-outlined">tactic</span>
                 <p class="projectName">Project Name</p>
                 <button class="options">
-                    <span class="material-symbols-outlined">
-                        more_horiz
-                        </span>
+                    <span class="material-symbols-outlined"> more_horiz </span>
                 </button>
             </li>
         </div>
