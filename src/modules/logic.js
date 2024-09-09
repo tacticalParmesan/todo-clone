@@ -1,5 +1,5 @@
-import Todo from "../components/todo";
-import Project from "../components/project";
+import Todo from "./todo";
+import Project from "./project";
 import { Store } from "./storage";
 
 export class Logic {
@@ -23,6 +23,7 @@ export class Logic {
      * @param {*} project Defaults to 'general' for non categorized Todos.
      */
     static createTodo(todoProperties, project) {
+        console.log(todoProperties)
         const newTodo = new Todo(
             todoProperties.title,
             todoProperties.description,

@@ -1,4 +1,4 @@
-import Project from "../components/project";
+import Project from "./project";
 
 export class Store {
     constructor() {}

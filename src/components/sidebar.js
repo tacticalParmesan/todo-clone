@@ -1,7 +1,8 @@
 import { Gui } from "../modules/gui";
 import { Store } from "../modules/storage";
 import { Utils } from "../modules/utils";
-import { ProjectForm, TodoForm } from "./forms";
+import { TodoForm } from "./todoform";
+import { ProjectForm } from "./projectform";
 import { isToday, format } from "date-fns";
 
 export class Sidebar {
@@ -24,7 +25,7 @@ export class Sidebar {
         this.toggleTabSelection()
 
         const addTodoButton = document.querySelector("#addTodoButton");
-        addTodoButton.onclick = () => TodoForm.init();
+        addTodoButton.onclick = () => TodoForm.openForm();
 
         const addProjectButton = document.querySelector("#addProject");
         addProjectButton.onclick = () => ProjectForm.init();

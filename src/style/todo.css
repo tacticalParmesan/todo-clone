@@ -49,6 +49,10 @@
 
 .todoDesc {
     margin-top: auto;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .rightTab {

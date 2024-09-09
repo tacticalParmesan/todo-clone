@@ -1,6 +1,6 @@
 const { isDate, format } = require("date-fns");
-import { Utils } from "../modules/utils.js";
-import { Store } from "../modules/storage.js";
+import { Utils } from "./utils.js";
+import { Store } from "./storage.js";
 
 /**
  * A class representing a Todo item: stores all data related to the

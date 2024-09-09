@@ -6,7 +6,7 @@ import { Sidebar } from "./components/sidebar";
 import "./style/main.css";
 import { Card } from "./components/card";
 import { isToday } from "date-fns";
-import { ProjectForm } from "./components/forms";
+import { ProjectForm, TodoForm } from "./components/todoform";
 
 /**
  * Handles startup of the Todo app by loading event listeners
@@ -23,6 +23,10 @@ const Startup = (function () {
     document.addEventListener("DOMContentLoaded", ()=>{
         Sidebar.init()
         Sidebar.showProjects()
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+        TodoForm.init()
     })
 
     return { general };

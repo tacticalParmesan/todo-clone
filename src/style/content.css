@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: clamp(360px, 620px, 800px);
+    width: clamp(360px, 680px, 800px);
     height: 100%;
 }
 

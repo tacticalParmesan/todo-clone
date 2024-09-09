@@ -1,5 +1,5 @@
-import { Utils } from "../modules/utils.js";
-import Todo from "./todo";
+import { Utils } from "./utils.js";
+import Todo from "./todo.js";
 
 /**
  *

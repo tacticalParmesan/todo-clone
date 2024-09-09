@@ -2,7 +2,7 @@ import { Utils } from "./utils";
 import { Store } from "./storage";
 import { Card } from "../components/card";
 import { Sidebar } from "../components/sidebar";
-import Project from "../components/project";
+import Project from "./project";
 
 export class Gui {
     constructor() {}

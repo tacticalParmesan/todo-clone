@@ -1,6 +1,6 @@
 <!-- #region Boilerplate -->
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -102,7 +102,7 @@
 
             <!-- #region Todo Form -->
             <!-- Form used for adding and editing todos -->
-            <dialog id="todoDialog">
+            <dialog id="todoDialog" >
                 <form action="" id="todoForm">
                     <div id="upperPanel">
                         <input
@@ -110,25 +110,23 @@
                             name=""
                             id="formTitle"
                             placeholder="Todo name"
-                            required
                         />
-                        <input
-                            type="text"
+                        <textarea
                             name=""
                             id="formDesc"
-                            placeholder="Description"
-                        />
+                            placeholder="Description of the task"
+                        ></textarea>
                     </div>
                     <div id="formOptions">
-                        <input type="date" name="" id="formDate" required />
-                        <select name="" id="formPriority" required>
+                        <input type="date" name="" id="formDate"  />
+                        <select name="" id="formPriority" >
                             <option value="" selected>Priority</option>
                             <option value="1">Priority 1</option>
                             <option value="2">Priority 2</option>
                             <option value="3">Priority 3</option>
                             <option value="4">Priority 4</option>
                         </select>
-                        <select name="" id="formProject" required>
+                        <select name="" id="formProject">
                             <option value="" selected>Project</option>
                         </select>
                     </div>
@@ -154,7 +152,9 @@
                     <textarea
                         name=""
                         id="projectDesc"
-                        placeholder="Briefly describe your project."
+                        placeholder="Briefly describe your project.(120ch)"
+                        rows="3"
+                        maxlength="120"
                     ></textarea>
                     <div id="colorSection">
                         <select name="" id="projectColor">
@@ -183,6 +183,7 @@
                         <div id="colorCircle"></div>
                     </div>
                 </div>
+                <hr>
                 <div id="buttonsTab">
                     <button id="closeProjectForm" class="closeButton">
                         Close
