@@ -1,5 +1,6 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { assert } = require("console");
 
 module.exports = {
     mode: "development",
@@ -24,12 +25,24 @@ module.exports = {
     },
     module: {
         rules: [
-          {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-          },
-        ],
-      },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                {
+                    loader: "svg-inline-loader",
+                    options: { 
+                        removeSVGTagAttrs: false 
+                    }
+                },
+            ],
+        },
+    ],
+},
+
     optimization: {
         runtimeChunk: "single"
     },

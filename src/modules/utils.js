@@ -53,4 +53,8 @@ export class Utils {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
     }
+
+    static randMax(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 }

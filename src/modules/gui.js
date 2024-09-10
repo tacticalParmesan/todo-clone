@@ -3,6 +3,10 @@ import { Store } from "./storage";
 import { Card } from "../components/card";
 import { Sidebar } from "../components/sidebar";
 import Project from "./project";
+import checklist from "../../assets/checklist-71.svg"
+import scrum from "../../assets/scrum-board-27.svg"
+import construction from "../../assets/construction-site-59.svg"
+
 
 export class Gui {
     constructor() {}
@@ -92,7 +96,12 @@ export class Gui {
      */
     static checkForEmptyProject() {
         const empty = document.querySelector("#emptyProjectScreen");
+        empty.removeChild(empty.firstChild)
+        
+        const svgs = [checklist, scrum, construction]
 
+        const svg = this.insertSvg(svgs[Utils.randMax(0, 2)])
+        empty.insertBefore(svg, empty.firstChild) 
         const todoView = document.querySelector("#todoView");
 
         if (todoView.firstChild) {
@@ -100,6 +109,15 @@ export class Gui {
         } else {
             empty.style.display = "flex";
         }
+    }
+
+    static insertSvg(svg) {
+        const parser = new DOMParser();
+        const svgImg = parser.parseFromString(svg, "image/svg+xml")
+        const svgElement = svgImg.documentElement
+        svgElement.id = "emptyImage"
+        svgElement.style = false;
+        return svgElement
     }
 
     /**

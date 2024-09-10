@@ -23,7 +23,7 @@ export const ProjectForm = (() => {
      * inputs and activates buttons and menus.
      */
     function init() {
-        dialog.modal.show();
+        openForm()
         dialog.closebtn.onclick = () => closeModal();
         dialog.color.onchange = () => updateColorCircle(dialog.color.value)
     }
@@ -34,6 +34,7 @@ export const ProjectForm = (() => {
      * @param {*} project 
      */
     function openForm(mode="create", project=null) {
+        dialog.modal.show();
         (mode === "edit") ? openForEditing(project) : openForCreation();
     }
     

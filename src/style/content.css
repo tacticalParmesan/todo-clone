@@ -68,9 +68,10 @@
     gap: 1rem;
     align-self: center;
     margin-top: 40%;
+    text-align: center;
 }
 
-#emptyImage {
-    width: 10rem;
-    height: 10rem;
+svg #emptyImage {
+    width: 200px;
+    height: 200px;
 }
