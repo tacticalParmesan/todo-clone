@@ -95,7 +95,6 @@ export const TodoForm = ( () => {
      * in memory and the Store to save it in storage.
      */
     function saveNewTodo() {   
-        
         const todoProperties = {
             title:          dialog.title.value,
             description:    dialog.description.value,
@@ -230,7 +229,7 @@ export const TodoForm = ( () => {
         let date;
 
         try {
-            format(dateToValidate, "d MMM yyyy");
+            date = format(dateToValidate, "d MMM yyyy");
         } catch (Error) {
             date = format(new Date(), "d MMM yyyy");
         }

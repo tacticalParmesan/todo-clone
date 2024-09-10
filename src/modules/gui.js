@@ -46,11 +46,13 @@ export class Gui {
      */
     static renderProject(project) {
         const projectName = document.querySelector("#projectName");
+        const projectDesc = document.querySelector("#projectDescription")
         const todoView = document.querySelector("#todoView");
         const todoList = project.getTodosList();
 
         this.clearTodoView();
         projectName.textContent = Utils.toTitleCase(project.name);
+        projectDesc.textContent = project.description
 
         for (const todo of todoList) {
             todoView.appendChild(Card.createCard(todo));
