@@ -251,7 +251,7 @@ export const TodoForm = ( () => {
      * @param {*} priority
      */
     function validatePriority(priority) {
-        return !priority ? "4" : prio;
+        return !priority ? "4" : priority;
     }
 
     return {  init, openForm  }
