@@ -26,7 +26,7 @@ export default class Project {
      */
     todos = [];
 
-    /**
+    /** UNUSED?
      * Flag to check whether the project is pending or complete.
      */
     complete = false;
@@ -103,6 +103,7 @@ export default class Project {
         obj.todos.forEach((todo) => {
             project.todos.push(Todo.fromJSON(JSON.stringify(todo)));
         });
+        
         return project;
     }
 

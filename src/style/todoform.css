@@ -98,25 +98,26 @@ dialog[open] {
     border: none;
 }
 
-#saveProject {
-    background-color: rgba(0, 49, 83, 0.50);
+#saveTodo {
+    background-color: rgba(0, 49, 83, 0.70);
     color: rgba(255, 255, 255, 0.85);
 }
 
-#closeProjectForm {
+#closeForm {
     background-color: rgba(195, 40, 13, 0.745);
     color: rgba(255, 255, 255, 0.85);
 }
 
-#saveProject:hover {
+#saveTodo:hover:not(.disabled) {
     cursor: pointer;
     background-color: rgba(0, 49, 83, 0.75);
     color: rgba(255, 255, 255, 0.85);
 }
 
-#closeProjectForm:hover {
+#closeForm:hover {
     cursor: pointer;
     background-color: rgba(195, 40, 13, 0.95);
     color: rgba(255, 255, 255, 0.85);
 }
+
 

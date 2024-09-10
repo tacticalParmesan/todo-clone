@@ -1,12 +1,9 @@
 import { Logic } from "./modules/logic";
-import { Store } from "./modules/storage";
-import { Utils } from "./modules/utils";
 import { Gui } from "./modules/gui";
 import { Sidebar } from "./components/sidebar";
+import { TodoForm } from "./components/todoform";
+import { ProjectForm } from "./components/projectform";
 import "./style/main.css";
-import { Card } from "./components/card";
-import { isToday } from "date-fns";
-import { ProjectForm, TodoForm } from "./components/todoform";
 
 /**
  * Handles startup of the Todo app by loading event listeners
@@ -27,6 +24,7 @@ const Startup = (function () {
 
     document.addEventListener("DOMContentLoaded", () => {
         TodoForm.init()
+        ProjectForm.init()
     })
 
     return { general };

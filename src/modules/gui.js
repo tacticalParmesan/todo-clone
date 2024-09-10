@@ -6,6 +6,7 @@ import Project from "./project";
 import checklist from "../../assets/checklist-71.svg"
 import scrum from "../../assets/scrum-board-27.svg"
 import construction from "../../assets/construction-site-59.svg"
+import { ProjectForm } from "../components/projectform";
 
 /**
  * Object that collects references and functions related to the Content Area
@@ -23,7 +24,7 @@ export const Gui = (function() {
         projectName:            document.querySelector("#projectName"),
         projectDesc:            document.querySelector("#projectDescription"),
         emptyPanel:             document.querySelector("#emptyProjectScreen"),
-        editProjectButton:      document.querySelector("#editProject"),
+        editProjectButton:      document.querySelector(".editProject"),
     }
 
     /**
@@ -70,6 +71,13 @@ export const Gui = (function() {
         for (const todo of project.getTodosList()) {
             todoView.appendChild(Card.createCard(todo));
         }
+
+        if (project.name === "general") {
+            ui.editProjectButton.style.display = "none"
+        } else {
+            ui.editProjectButton.style.display = "flex"
+            ui.editProjectButton.onclick = () => ProjectForm.openForm("edit", project)
+        }
     };
 
     /**
@@ -115,7 +123,7 @@ export const Gui = (function() {
         const svg = insertSvg(svgs[Utils.randMax(0, 2)])
         ui.emptyPanel.insertBefore(svg, ui.emptyPanel.firstChild) 
         
-        ui.emptyPanel.style = ui.todoView.firstChild ? "none" : "flex"
+        ui.emptyPanel.style.display = ui.todoView.firstChild ? "none" : "flex"
         
     };
 
@@ -142,7 +150,7 @@ export const Gui = (function() {
         const project = currentProject;
         
         if (Array.isArray(project.filtered)) {
-            this.renderFiltered(project.filtered.at(0), project.filtered[1]);
+            renderFiltered(project.filtered.at(0), project.filtered[1]);
         }
     };
 
@@ -152,7 +160,7 @@ export const Gui = (function() {
      */
     function update() {
         Sidebar.updateTodayTodos();
-        this.checkForEmptyProject();
+        checkForEmptyProject();
     };
 
     return {

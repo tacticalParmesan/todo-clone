@@ -1,6 +1,7 @@
 import { Store } from "../modules/storage";
 import { Sidebar } from "./sidebar"; 
 import { Logic } from "../modules/logic";
+import { Gui } from "../modules/gui";
 
 /**
  * Contains functionalities for the dialog and inner form
@@ -14,7 +15,7 @@ export const ProjectForm = (() => {
         savebtn:       document.querySelector("#saveProject"),
         name:          document.querySelector("#projectFormName"),
         description:   document.querySelector("#projectDesc"),
-        color:         document.querySelector("#projectColor"),
+        uicolor:         document.querySelector("#projectColor"),
         circle:        document.querySelector("#colorCircle")
     };
     
@@ -23,9 +24,8 @@ export const ProjectForm = (() => {
      * inputs and activates buttons and menus.
      */
     function init() {
-        openForm()
-        dialog.closebtn.onclick = () => closeModal();
-        dialog.color.onchange = () => updateColorCircle(dialog.color.value)
+        dialog.closebtn.onclick = () => closeForm();
+        dialog.uicolor.onchange = () => updateColorCircle(dialog.uicolor.value)
     }
     
     /**
@@ -50,9 +50,10 @@ export const ProjectForm = (() => {
      * @param {*} project 
      */
     function openForEditing(project) {
-        
+
         const propertiesToUpdate = ["name", "description", "uicolor" ]
         .forEach((property) => dialog[property].value = project[property])
+        updateColorCircle(project.uicolor)
 
         dialog.savebtn.textContent = "Save changes";
 
@@ -67,7 +68,7 @@ export const ProjectForm = (() => {
     /**
      * Closes the project modal and resets field values.
      */
-    function closeModal() {
+    function closeForm() {
         dialog.modal.close();
         resetForm();
     }
@@ -76,8 +77,8 @@ export const ProjectForm = (() => {
      * Reset field values.
      */
     function resetForm() {        
-        [dialog.name, dialog.description, dialog.color].forEach(
-            (field) => {field.value = ""})
+        [dialog.name, dialog.description, dialog.uicolor].forEach(
+            (field) => field.value = "")
     }
 
     /**
@@ -88,12 +89,34 @@ export const ProjectForm = (() => {
         const newProject = Logic.createProject(
             dialog.name.value,
             dialog.description.value,
-            dialog.color.value
+            dialog.uicolor.value
         );
 
-        closeModal();
+        closeForm();
         
         Store.saveProject(newProject);
+        Sidebar.showProjects();
+    }
+
+    function saveProjectChanges(project) {
+        const propertiesToWatch = [
+            "name", 
+            "description", 
+            "uicolor", 
+        ]
+        for (const property of propertiesToWatch) {
+            
+            const newValue = dialog[property].value;
+            const oldValue = project[property];
+
+            if (newValue !== oldValue) {
+                Logic.editProject(project, property, newValue)
+            }
+        }
+
+        if (project === Gui.getCurrentProject()) Gui.switchProject(project)
+
+        Store.saveProject(project);
         Sidebar.showProjects();
     }
 
@@ -106,5 +129,5 @@ export const ProjectForm = (() => {
         dialog.circle.style.backgroundColor = color;
     }
 
-    return { init }
+    return { init, openForm }
 })();

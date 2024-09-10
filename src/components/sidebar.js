@@ -28,7 +28,7 @@ export class Sidebar {
         addTodoButton.onclick = () => TodoForm.openForm();
 
         const addProjectButton = document.querySelector("#addProject");
-        addProjectButton.onclick = () => ProjectForm.init();
+        addProjectButton.onclick = () => ProjectForm.openForm();
 
         const inboxTab = document.querySelector("#inbox");
         inboxTab.classList.toggle("current")

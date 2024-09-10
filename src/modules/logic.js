@@ -148,6 +148,13 @@ export class Logic {
             if (property !== "todos" && property in project) {
                 const oldValue = project[property];
                 project[property] = value;
+
+                if (property === "name") {
+                    project.getTodosList().forEach(todo => {
+                        this.editTodo(project, todo)
+                    });
+                }
+
                 console.info(
                     `Edited project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`
                 );

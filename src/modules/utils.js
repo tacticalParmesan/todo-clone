@@ -32,7 +32,7 @@ export class Utils {
     /**
      * Generate a random hexadecimal identifier.
      */
-    static generateHexId() {
+    static generateHexId(proj) {
         let hex = "";
         for (let i = 0; i < 6; i++) {
             const randN = Math.floor(Math.random() * 16);
