@@ -46,6 +46,25 @@ export const ProjectForm = (() => {
     }
 
     /**
+     * Opens the Project form in editing mode.
+     * @param {*} project 
+     */
+    function openForEditing(project) {
+        
+        const propertiesToUpdate = ["name", "description", "uicolor" ]
+        .forEach((property) => dialog[property].value = project[property])
+
+        dialog.savebtn.textContent = "Save changes";
+
+        dialog.savebtn.onclick = (e) => {
+            saveProjectChanges(project);
+            closeForm();
+        };
+
+        dialog.modal.show()
+    }
+
+    /**
      * Closes the project modal and resets field values.
      */
     function closeModal() {

@@ -55,17 +55,14 @@ export const TodoForm = ( () => {
      * Opens todo form in creation mode.
      */
     function openForCreation() {
-        console.log("creation", dialog.project.value === "")
-
         dialog.project.value =
         Gui.currentProject.name !== "general" 
         ? Gui.currentProject.name 
         : "";
-        console.log("creation", dialog.project.value === "")
 
         dialog.savebtn.onclick = (e) => {
             saveNewTodo();
-            dialog.modal.close();
+            closeForm();
         };
         
         dialog.modal.show()
@@ -84,7 +81,7 @@ export const TodoForm = ( () => {
 
         dialog.savebtn.onclick = (e) => {
             saveTodoChanges(todo);
-            dialog.modal.close();
+            closeForm();
         };
 
         dialog.modal.show()

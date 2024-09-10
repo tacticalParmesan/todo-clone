@@ -23,7 +23,6 @@ export class Logic {
      * @param {*} project Defaults to 'general' for non categorized Todos.
      */
     static createTodo(todoProperties, project) {
-        console.log(todoProperties)
         const newTodo = new Todo(
             todoProperties.title,
             todoProperties.description,
@@ -96,7 +95,6 @@ export class Logic {
 
         this.deleteTodo(from, todo);
         Store.saveProject(from);
-        console.log(localStorage);
 
         to.add(todo);
         Store.saveProject(to);

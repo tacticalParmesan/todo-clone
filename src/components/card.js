@@ -68,7 +68,6 @@ export class Card {
                 ? Gui.currentProject
                 : Store.loadProject(todo.project);
 
-        console.log(project, todo);
         document.querySelector("#todoView").removeChild(todoUI);
 
         Logic.deleteTodo(project, todo);
