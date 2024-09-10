@@ -56,8 +56,8 @@ export const TodoForm = ( () => {
      */
     function openForCreation() {
         dialog.project.value =
-        Gui.currentProject.name !== "general" 
-        ? Gui.currentProject.name 
+        Gui.getCurrentProject().name !== "general" 
+        ? Gui.getCurrentProject().name 
         : "";
 
         dialog.savebtn.onclick = (e) => {
@@ -105,16 +105,16 @@ export const TodoForm = ( () => {
          * added to handle when the user creates a todo from the general view.
          */
         const projectToUpdate =
-            Gui.currentProject.name === todoProperties.projectName
-            ? Gui.currentProject
+            Gui.getCurrentProject().name === todoProperties.projectName
+            ? Gui.getCurrentProject()
             : Store.loadProject(todoProperties.projectName);
 
         Logic.createTodo(todoProperties, projectToUpdate);
 
         Store.saveProject(projectToUpdate);
 
-        if (projectToUpdate === Gui.currentProject) {
-            Gui.renderProject(Gui.currentProject);
+        if (projectToUpdate === Gui.getCurrentProject()) {
+            Gui.renderProject(Gui.getCurrentProject());
         }
 
         Gui.update()
@@ -131,8 +131,8 @@ export const TodoForm = ( () => {
         const todoUI = document.querySelector(`[uid="${todo.getUid()}"]`);
 
         const projectToUpdate =
-            Gui.currentProject.name === todo.project
-            ? Gui.currentProject
+            Gui.getCurrentProject().name === todo.project
+            ? Gui.getCurrentProject()
             : Store.loadProject(todo.project);
 
         let hasProjectChanged;

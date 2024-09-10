@@ -35,8 +35,8 @@ export class Card {
 
         // Ternary operator in case we are in the "General" view or in a filtered one.
         Store.saveProject(
-            Gui.currentProject.name === todo.project
-                ? Gui.currentProject
+            Gui.getCurrentProject().name === todo.project
+                ? Gui.getCurrentProject()
                 : Store.loadProject(todo.project)
         );
     }
@@ -64,8 +64,8 @@ export class Card {
      */
     static deleteTodo(todo, todoUI) {
         let project =
-            Gui.currentProject.name === todo.project
-                ? Gui.currentProject
+            Gui.getCurrentProject().name === todo.project
+                ? Gui.getCurrentProject()
                 : Store.loadProject(todo.project);
 
         document.querySelector("#todoView").removeChild(todoUI);

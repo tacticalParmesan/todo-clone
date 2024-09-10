@@ -7,36 +7,54 @@ import checklist from "../../assets/checklist-71.svg"
 import scrum from "../../assets/scrum-board-27.svg"
 import construction from "../../assets/construction-site-59.svg"
 
+/**
+ * Object that collects references and functions related to the Content Area
+ * and the general behaviour of the GUI. Leaves autonomy to methods from
+ * smaller components like Todo cards and the Sidebar, in separate entities.
+ */
+export const Gui = (function() {
 
-export class Gui {
-    constructor() {}
-
-    //#region Implementing singleton pattern
-    static getInstance() {
-        if (!Gui.instance) {
-            Gui.instance = new Gui();
-        }
-        return Gui.instance;
+    /**
+     * Collection of references to UI elements not included
+     * in smaller components.
+     */
+    const ui = {
+        todoView:               document.querySelector("#todoView"),
+        projectName:            document.querySelector("#projectName"),
+        projectDesc:            document.querySelector("#projectDescription"),
+        emptyPanel:             document.querySelector("#emptyProjectScreen"),
+        editProjectButton:      document.querySelector("#editProject"),
     }
-    //#endregion
+
+    /**
+     * Collection of SVG imports to be displayed in the content panel
+     * with the message to create a new project.
+     */
+    const svgs = [checklist, scrum, construction]
 
     /**
      * The current project shown in the content area.
      * Gets updated on project switching.
      */
-    currentProject;
+    let currentProject;
+
+    function setCurrentProject(value) {
+        currentProject = value
+    }
+
+    function getCurrentProject() {
+        return currentProject
+    }
 
     /**
      * Clears the Todo view in the content panel by wiping
      * todo child elements.
      */
-    static clearTodoView() {
-        const todoView = document.querySelector("#todoView");
-
-        while (todoView.firstChild) {
+    function clearTodoView() {
+        while (ui.todoView.firstChild) {
             todoView.removeChild(todoView.firstChild);
         }
-    }
+    };
 
     /**
      * Loads the clicked project in the GUI by calling the Storage component
@@ -44,31 +62,26 @@ export class Gui {
      * the collection of todos.
      * @param {*} project
      */
-    static renderProject(project) {
-        const projectName = document.querySelector("#projectName");
-        const projectDesc = document.querySelector("#projectDescription")
-        const todoView = document.querySelector("#todoView");
-        const todoList = project.getTodosList();
+    function renderProject(project) {
+        clearTodoView();
+        ui.projectName.textContent = Utils.toTitleCase(project.name);
+        ui.projectDesc.textContent = project.description
 
-        this.clearTodoView();
-        projectName.textContent = Utils.toTitleCase(project.name);
-        projectDesc.textContent = project.description
-
-        for (const todo of todoList) {
+        for (const todo of project.getTodosList()) {
             todoView.appendChild(Card.createCard(todo));
         }
-    }
+    };
 
     /**
      * Switches the content view between projects, from current
      * to target one.
      * @param {*} target
      */
-    static switchProject(target) {
-        this.currentProject = target;
-        this.renderProject(target);
-        this.checkForEmptyProject();
-    }
+    function switchProject(target) {
+        currentProject = target;
+        renderProject(target);
+        checkForEmptyProject();
+    };
 
     /**
      * Creates a temporary project to store filtered todos and render them
@@ -76,7 +89,7 @@ export class Gui {
      * @param {*} property 
      * @param {*} value 
      */
-    static renderFiltered(property, value) {
+    function renderFiltered(property, value) {
         const filterName = Utils.toTitleCase(property);
         const filteredTodos = Store.loadAllTodos().filter(
             (todo) => todo[property] === value
@@ -88,37 +101,36 @@ export class Gui {
             "black",
             [property, value]
         );
-        filteredTodos.map((todo) => tempProject.add(todo));
-        this.switchProject(tempProject);
-    }
+        filteredTodos.forEach((todo) => tempProject.add(todo));
+        switchProject(tempProject);
+    };
 
     /**
      * Checks if the currently displayed project is empty and shows
-     * call to action graphic if this is the case.
+     * call to action graphics if this is the case.
      */
-    static checkForEmptyProject() {
-        const empty = document.querySelector("#emptyProjectScreen");
-        empty.removeChild(empty.firstChild)
+    function checkForEmptyProject() {
+        ui.emptyPanel.removeChild(ui.emptyPanel.firstChild)
         
-        const svgs = [checklist, scrum, construction]
+        const svg = insertSvg(svgs[Utils.randMax(0, 2)])
+        ui.emptyPanel.insertBefore(svg, ui.emptyPanel.firstChild) 
+        
+        ui.emptyPanel.style = ui.todoView.firstChild ? "none" : "flex"
+        
+    };
 
-        const svg = this.insertSvg(svgs[Utils.randMax(0, 2)])
-        empty.insertBefore(svg, empty.firstChild) 
-        const todoView = document.querySelector("#todoView");
-
-        if (todoView.firstChild) {
-            empty.style.display = "none";
-        } else {
-            empty.style.display = "flex";
-        }
-    }
-
-    static insertSvg(svg) {
-        const parser = new DOMParser();
-        const svgImg = parser.parseFromString(svg, "image/svg+xml")
+    /**
+     * Displays an SVG graphic in the Content Area if the project is empty
+     * by getting the imported <svg> element and parsing it into a new HTML
+     * element to be later appended to the DOM.
+     * @param {*} svg 
+     * @returns 
+     */
+    function insertSvg(svg) {
+        const svgImg = (new DOMParser()).parseFromString(svg, "image/svg+xml")
         const svgElement = svgImg.documentElement
         svgElement.id = "emptyImage"
-        svgElement.style = false;
+        svgElement.style = false; // Resets style because the original has a style attr
         return svgElement
     }
 
@@ -126,20 +138,31 @@ export class Gui {
      * Checks if the current viewed project is a temporary "filter"
      * project and in that case filters again to update displayed values.
      */
-    static checkIfFiltered() {
-        const project = this.currentProject;
+    function checkIfFiltered() {
+        const project = currentProject;
         
         if (Array.isArray(project.filtered)) {
             this.renderFiltered(project.filtered.at(0), project.filtered[1]);
         }
-    }
+    };
 
     /**
      * Updates dynamic UI elements like counters and panle that should be
      * hidden or visibile based on Todo state.
      */
-    static update() {
+    function update() {
         Sidebar.updateTodayTodos();
         this.checkForEmptyProject();
+    };
+
+    return {
+        setCurrentProject,
+        getCurrentProject,
+        renderProject,
+        switchProject,
+        renderFiltered,
+        checkForEmptyProject,
+        checkIfFiltered,
+        update
     }
-}
+})();

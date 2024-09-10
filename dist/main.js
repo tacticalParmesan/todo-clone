@@ -24241,7 +24241,6 @@ class Logic {
             (t) => t.getUid() === todo.getUid()
         );
         project.todos.splice(indexToDelete, 1);
-        console.log(project.getTodosList());
         console.info(
             `Deleted todo '${todo.title}' from project '${project.name}'.`
         );
