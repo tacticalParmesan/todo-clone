@@ -16,7 +16,8 @@ export default class Project {
         this.name = name.toLowerCase();
         this.description = description;
         this.uicolor = uicolor;
-        this.filtered = filtered
+        this.filtered = filtered;
+        this.#uid = name === "general" ? "aaa000" : Utils.generateHexId()
     }
 
     /** Project class fields */
@@ -25,6 +26,8 @@ export default class Project {
      * instance of the project.
      */
     todos = [];
+
+    #uid;
 
     /** UNUSED?
      * Flag to check whether the project is pending or complete.
@@ -88,6 +91,7 @@ export default class Project {
             todos: this.todos,
             complete: this.complete,
             uicolor: this._uicolor,
+            uid: this.#uid
         };
     }
 
@@ -103,6 +107,8 @@ export default class Project {
         obj.todos.forEach((todo) => {
             project.todos.push(Todo.fromJSON(JSON.stringify(todo)));
         });
+
+        project.#uid = obj.uid
         
         return project;
     }
