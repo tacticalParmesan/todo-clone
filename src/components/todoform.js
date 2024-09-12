@@ -156,7 +156,7 @@ export const TodoForm = ( () => {
             const oldValue = todo[property];
 
             if (newValue !== oldValue) {
-                Logic.editTodo(
+                todo = Logic.editTodo(
                     projectToUpdate,
                     todo,
                     property,
@@ -165,9 +165,11 @@ export const TodoForm = ( () => {
                 Card.editTodoUI([property, newValue], todoUI);
 
                 if (property === "project") {
+                    
                     Logic.moveTodo(oldValue, newValue, todo);
                     hasProjectChanged = true;
                     todoView.removeChild(todoUI);
+
                 }
             }
         }

@@ -60,16 +60,17 @@ export class Logic {
 
     /**
      * Edits the passed property replacing its value with the given one.
-     * Check if the todo belongs to the project and if the property is
+     * Checks if the todo belongs to the project and if the property is
      * one of the Todo type.
      * @param {*} project
      * @param {*} todo
      * @param {*} property
      * @param {*} value
-     * @returns
+     * @returns The edited Todo
      */
     static editTodo(project, todo, property, value) {
         if (!project.hasTodo(todo)) {
+            console.log("check if project has todo")
             return;
         }
         const target = project.todos.find(
@@ -80,6 +81,8 @@ export class Logic {
         console.info(
             `Edited todo '${todo.title}' inside project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`
         );
+
+        return target
     }
 
     /**
