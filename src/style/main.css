@@ -25,13 +25,14 @@
 /*#region Page Layout */
 
 body {
-    min-height: 100vh;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0);
 }
 
 .app {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
+    overflow: hidden;
 }
 
 /*#endregion */

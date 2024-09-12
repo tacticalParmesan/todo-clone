@@ -3,8 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     padding: 2rem;
+    /* overflow-y: scroll;  */
+    /* overflow-x: hidden; */
 }
 
 #content-view {
@@ -13,6 +16,8 @@
     align-items: flex-start;
     width: clamp(360px, 680px, 800px);
     height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 #upperContentPanel,
