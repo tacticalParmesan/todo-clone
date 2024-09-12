@@ -33,7 +33,7 @@ export class Sidebar {
         const inboxTab = document.querySelector("#inbox");
         inboxTab.classList.toggle("current")
         inboxTab.onclick = () => {
-            Gui.switchProject(Store.loadProject("general"));
+            Gui.switchProject(Store.loadProject("aaa000"));
         };
 
         const todayTab = document.querySelector("#today");
@@ -78,17 +78,18 @@ export class Sidebar {
         this.clearProjects();
 
         for (const project of Object.keys(localStorage)) {
-            if (project === "general") {
+            if (project === "aaa000") {
                 continue;
             }
 
+            const loaded = Store.loadProject(project)
             const tab = template.cloneNode(true);
             tab.id = project.toLowerCase();
 
             tab.querySelector(".projectName").textContent =
-                Utils.toTitleCase(project);
+                Utils.toTitleCase(loaded.name);
             tab.querySelector("span").style.color =
-                Store.loadProject(project).uicolor;
+                loaded.uicolor;
             tab.onclick = () => {
                 Gui.switchProject(Store.loadProject(project));
             }

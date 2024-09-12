@@ -1,6 +1,6 @@
 #sidebar {
     background-color: rgba(0,49,83,0.025);
-    min-width: 250px;
+    min-width: 240px;
     padding: 0.5rem;
     min-height: 100%;
     box-sizing: content-box;
@@ -158,6 +158,12 @@
     border: none;
 
     margin-left: auto;
+}
+
+.projectName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 

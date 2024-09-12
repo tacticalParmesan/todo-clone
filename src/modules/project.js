@@ -17,7 +17,7 @@ export default class Project {
         this.description = description;
         this.uicolor = uicolor;
         this.filtered = filtered;
-        this.#uid = name === "general" ? "aaa000" : Utils.generateHexId()
+        this.#uid = (name === "general") ? "aaa000"  : Utils.generateHexId()
     }
 
     /** Project class fields */
@@ -48,8 +48,7 @@ export default class Project {
     }
 
     set description(value) {
-        if (Utils.isValidString("description", value))
-            this._description = value;
+        this._description = value;
     }
 
     get uicolor() {
@@ -58,6 +57,10 @@ export default class Project {
 
     set uicolor(value) {
         this._uicolor = value;
+    }
+
+    getUid() {
+        return this.#uid
     }
     //#endregion
 

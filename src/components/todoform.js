@@ -55,10 +55,10 @@ export const TodoForm = ( () => {
      * Opens todo form in creation mode.
      */
     function openForCreation() {
-        dialog.project.value =
-        Gui.getCurrentProject().name !== "general" 
-        ? Gui.getCurrentProject().name 
-        : "";
+        dialog.project.value = 
+            !Gui.getCurrentProject().filtered 
+            ? Gui.getCurrentProject().getUid() 
+            : "aaa000"
 
         dialog.savebtn.onclick = (e) => {
             saveNewTodo();
@@ -97,7 +97,7 @@ export const TodoForm = ( () => {
             description:    dialog.description.value,
             dueDate:        validateDate(dialog.dueDate.value),
             priority:       validatePriority(dialog.priority.value),
-            projectName:    validateProject(dialog.project.value),
+            projectID:      validateProject(dialog.project.value),
         }
         /**
          * If the project to update is the currently displayed one it will
@@ -105,9 +105,9 @@ export const TodoForm = ( () => {
          * added to handle when the user creates a todo from the general view.
          */
         const projectToUpdate =
-            Gui.getCurrentProject().name === todoProperties.projectName
+            Gui.getCurrentProject().getUid() === todoProperties.projectID
             ? Gui.getCurrentProject()
-            : Store.loadProject(todoProperties.projectName);
+            : Store.loadProject(todoProperties.projectID);
 
         Logic.createTodo(todoProperties, projectToUpdate);
 
@@ -116,6 +116,8 @@ export const TodoForm = ( () => {
         if (projectToUpdate === Gui.getCurrentProject()) {
             Gui.renderProject(Gui.getCurrentProject());
         }
+
+        console.log(Gui.getCurrentProject(), todoProperties)
 
         Gui.update()
         Gui.checkIfFiltered()
@@ -131,7 +133,7 @@ export const TodoForm = ( () => {
         const todoUI = document.querySelector(`[uid="${todo.getUid()}"]`);
 
         const projectToUpdate =
-            Gui.getCurrentProject().name === todo.project
+            Gui.getCurrentProject().getUid() === todo.project
             ? Gui.getCurrentProject()
             : Store.loadProject(todo.project);
 
@@ -204,8 +206,8 @@ export const TodoForm = ( () => {
         for (const project of Object.keys(localStorage)) {
 
             const newOption = document.createElement("option");
-            newOption.value = project.toLowerCase();
-            newOption.textContent = Utils.toTitleCase(project);
+            newOption.value = project;
+            newOption.textContent = Utils.toTitleCase(Store.loadProject(project).name);
 
             if (!selection.contains
                 (
@@ -239,7 +241,7 @@ export const TodoForm = ( () => {
      * @returns
      */
     function validateProject(project) {
-        return !project ? "general" : project;
+        return !project ? "aaa000" : project;
     }
 
     /**

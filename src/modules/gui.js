@@ -64,6 +64,7 @@ export const Gui = (function() {
      * @param {*} project
      */
     function renderProject(project) {
+        console.log(project)
         clearTodoView();
         ui.projectName.textContent = Utils.toTitleCase(project.name);
         ui.projectDesc.textContent = project.description
@@ -72,7 +73,7 @@ export const Gui = (function() {
             todoView.appendChild(Card.createCard(todo));
         }
 
-        if (project.name === "general") {
+        if (project.getUid() === "aaa000" || project.filtered) {
             ui.editProjectButton.style.display = "none"
         } else {
             ui.editProjectButton.style.display = "flex"

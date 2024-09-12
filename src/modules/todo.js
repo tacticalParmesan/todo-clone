@@ -19,13 +19,13 @@ export default class Todo {
         description,
         dueDate = new Date(),
         priority = "4",
-        projectName = "general"
+        projectID = "aaa000"
     ) {
         this.title = title;
         this.description = description;
         this.dueDate = format(new Date(dueDate), "d MMM yyyy");
         this.priority = priority;
-        this.project = projectName;
+        this.project = projectID;
     }
 
     #uid = Utils.generateHexId();
@@ -71,7 +71,7 @@ export default class Todo {
     }
 
     set project(value) {
-        this._project = Store.doProjectExist(value) ? value : this._project;
+        this._project = Store.doProjectExistById(value) ? value : this._project;
     }
 
     getUid() {

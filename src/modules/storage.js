@@ -18,7 +18,7 @@ export class Store {
      */
     static saveProject(project) {
         if (project instanceof Project) {
-            localStorage.setItem(project.name, JSON.stringify(project));
+            localStorage.setItem(project.getUid(), JSON.stringify(project));
             console.info(`Saved project ${project.name} in storage.`);
         }
     }
@@ -30,15 +30,15 @@ export class Store {
      * @param {*} projectName
      * @returns a Project instance
      */
-    static loadProject(projectName) {
-        if (!this.doProjectExist(projectName)) {
+    static loadProject(uid) {
+        if (!this.doProjectExistById(uid)) {
             return;
         }
 
-        const projectObject = localStorage.getItem(projectName);
-        console.info(`Loaded project ${projectName} from storage.`);
+        const project = Project.fromJSON(localStorage.getItem(uid));
+        console.info(`Loaded project ${project.name} from storage.`);
 
-        return Project.fromJSON(projectObject);
+        return project;
     }
 
     /**
@@ -58,10 +58,10 @@ export class Store {
 
     /**
      * Uses localStorage API to remove a project.
-     * @param {*} projectName
+     * @param {*} uid
      */
-    static removeProject(projectName) {
-        localStorage.removeItem(projectName);
+    static removeProject(uid) {
+        localStorage.removeItem(uid);
     }
 
     /**
@@ -69,9 +69,22 @@ export class Store {
      * @param {*} projectName
      * @returns
      */
-    static doProjectExist(projectName) {
-        const check = localStorage.getItem(projectName) ? true : false;
-        if (!check) console.info(`Project ${projectName} does not exist.`);
+    static doProjectExistById(uid) {
+        const check = localStorage.getItem(uid);
+        if (!check) console.info(`Project does not exist.`);
         return check;
     }
+
+    // static doProjectExistByName(name) {
+    //     for (const project in JSON.parse(localStorage)) {
+    //         console.log(project)
+    //         if (Project.fromJSON(project).name === name) {
+    //             return true
+    //         } else {
+    //             continue
+    //         }
+    //     }
+    //     return false
+
+    // }
 }

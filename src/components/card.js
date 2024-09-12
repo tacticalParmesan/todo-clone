@@ -35,7 +35,7 @@ export class Card {
 
         // Ternary operator in case we are in the "General" view or in a filtered one.
         Store.saveProject(
-            Gui.getCurrentProject().name === todo.project
+            Gui.getCurrentProject().getUid() === todo.project
                 ? Gui.getCurrentProject()
                 : Store.loadProject(todo.project)
         );
@@ -64,7 +64,7 @@ export class Card {
      */
     static deleteTodo(todo, todoUI) {
         let project =
-            Gui.getCurrentProject().name === todo.project
+            Gui.getCurrentProject().getUid() === todo.project
                 ? Gui.getCurrentProject()
                 : Store.loadProject(todo.project);
 
@@ -105,7 +105,7 @@ export class Card {
         newCard.querySelector(".todoTitle").textContent = todo.title;
         newCard.querySelector(".todoDesc").textContent = todo.description;
         newCard.querySelector(".todoProject").textContent = Utils.toTitleCase(
-            todo.project
+            Store.loadProject(todo.project).name
         );
         newCard.querySelector("time").datetime = todo.dueDate;
         newCard.querySelector("time").textContent = todo.dueDate;

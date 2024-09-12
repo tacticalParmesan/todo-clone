@@ -28,7 +28,7 @@ export class Logic {
             todoProperties.description,
             todoProperties.dueDate,
             todoProperties.priority,
-            todoProperties.projectName
+            todoProperties.projectID
         );
 
         project.add(newTodo);
@@ -91,7 +91,7 @@ export class Logic {
     static moveTodo(source, target, todo) {
         const from = Store.loadProject(source);
         const to = Store.loadProject(target);
-
+        console.log(source, target)
         this.deleteTodo(from, todo);
         Store.saveProject(from);
 
@@ -111,13 +111,9 @@ export class Logic {
      * @returns An instance of the new Project
      */
     static createProject(name, description, color) {
-        if (!Store.doProjectExist(name)) {
-            const newProject = new Project(name, description, color);
-            console.info(`Created project '${name}'.`);
-            return newProject;
-        } else {
-            console.error(`Project '${name}' already exists in storage.`);
-        }
+        const newProject = new Project(name, description, color);
+        console.info(`Created project '${name}'.`);
+        return newProject;
     }
 
     /**
@@ -126,12 +122,12 @@ export class Logic {
      * @param {*} name
      * @returns
      */
-    static deleteProject(name) {
-        if (!Store.doProjectExist(name)) {
+    static deleteProject(uid) {
+        if (!Store.doProjectExistById(uid)) {
             return;
         }
-        Store.removeProject(name);
-        console.info(`Deleted project '${name}'.`);
+        Store.removeProject(uid);
+        console.info(`Deleted project '${uid}'.`);
     }
 
     /**
@@ -144,7 +140,7 @@ export class Logic {
      * @returns
      */
     static editProject(project, property, value) {
-        if (Store.doProjectExist(project.name)) {
+        if (Store.doProjectExistById(project.name)) {
             if (property !== "todos" && property in project) {
                 const oldValue = project[property];
                 project[property] = value;
@@ -177,7 +173,7 @@ export class Logic {
      * project if it does not exist.
      */
     static initDefaultProject() {
-        let general = Store.loadProject("general");
+        let general = Store.loadProject("aaa000");
 
         if (!general) {
             general = this.createProject(
