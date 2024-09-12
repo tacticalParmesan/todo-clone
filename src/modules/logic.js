@@ -66,7 +66,7 @@ export class Logic {
      * @param {*} todo
      * @param {*} property
      * @param {*} value
-     * @returns The edited Todo
+     * @returns The edited todo
      */
     static editTodo(project, todo, property, value) {
         if (!project.hasTodo(todo)) {
@@ -143,16 +143,10 @@ export class Logic {
      * @returns
      */
     static editProject(project, property, value) {
-        if (Store.doProjectExistById(project.name)) {
+        if (Store.doProjectExistById(project.getUid())) {
             if (property !== "todos" && property in project) {
                 const oldValue = project[property];
                 project[property] = value;
-
-                if (property === "name") {
-                    project.getTodosList().forEach(todo => {
-                        this.editTodo(project, todo)
-                    });
-                }
 
                 console.info(
                     `Edited project '${project.name}.' ('${property}: old: ${oldValue} new:${value}')`

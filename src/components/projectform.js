@@ -113,11 +113,12 @@ export const ProjectForm = (() => {
                 Logic.editProject(project, property, newValue)
             }
         }
-
-        if (project === Gui.getCurrentProject()) Gui.switchProject(project)
-
+        
         Store.saveProject(project);
         Sidebar.showProjects();
+        
+        if (project === Gui.getCurrentProject()) Gui.switchProject(project)
+
     }
 
     /**
