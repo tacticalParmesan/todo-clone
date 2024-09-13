@@ -7,6 +7,7 @@ import checklist from "../../assets/checklist-71.svg"
 import scrum from "../../assets/scrum-board-27.svg"
 import construction from "../../assets/construction-site-59.svg"
 import { ProjectForm } from "../components/projectform";
+import { Logic } from "./logic";
 
 /**
  * Object that collects references and functions related to the Content Area
@@ -24,7 +25,8 @@ export const Gui = (function() {
         projectName:            document.querySelector("#projectName"),
         projectDesc:            document.querySelector("#projectDescription"),
         emptyPanel:             document.querySelector("#emptyProjectScreen"),
-        editProjectButton:      document.querySelector(".editProject"),
+        editProjectButton:      document.querySelector(".edit"),
+        deleteProjectButton:    document.querySelector(".delete"),
     }
 
     /**
@@ -58,6 +60,17 @@ export const Gui = (function() {
     };
 
     /**
+     * Visual command from GUI to delete a project. Updates all displayed
+     * data that may have changed.
+     * @param {*} project 
+     */
+    function deleteProject(project) {
+        Logic.deleteProject(project.getUid());
+        Gui.update();
+        Sidebar.showInbox();
+    }
+
+    /**
      * Loads the clicked project in the GUI by calling the Storage component
      * to acquire the project data and by calling the rendering method onto
      * the collection of todos.
@@ -74,9 +87,13 @@ export const Gui = (function() {
 
         if (project.getUid() === "aaa000" || project.filtered) {
             ui.editProjectButton.style.display = "none"
+            ui.deleteProjectButton.style.display = "none"
+
         } else {
             ui.editProjectButton.style.display = "flex"
+            ui.deleteProjectButton.style.display = "flex"
             ui.editProjectButton.onclick = () => ProjectForm.openForm("edit", project)
+            ui.deleteProjectButton.onclick = () => deleteProject(project)
         }
     };
 
@@ -160,6 +177,7 @@ export const Gui = (function() {
      */
     function update() {
         Sidebar.updateTodayTodos();
+        Sidebar.showProjects();
         checkForEmptyProject();
     };
 

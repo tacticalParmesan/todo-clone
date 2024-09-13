@@ -23,7 +23,7 @@
                         </div>
                         <p id="username">Username</p>
                     </div>
-                    <button id="foldButton">
+                    <button class="foldButton">
                         <span class="material-symbols-outlined">
                             left_panel_close
                         </span>
@@ -59,19 +59,30 @@
                     </div>
                     <ol id="projectList"></ol>
                 </section>
-                <button id="mdb" hidden>MAGIC DEBUG BUTTON</button>
             </nav>
             <!-- #endregion -->
             <!-- #region Content Area -->
             <div id="content">
+                <button class="foldButton content">
+                    <span class="material-symbols-outlined">
+                        left_panel_close
+                    </span>
+                </button>
                 <div id="content-view">
                     <div id="upperContentPanel">
                         <h2 id="projectName">Project Name</h2>
-                        <button class="editProject">
-                            <span class="material-symbols-outlined">
-                                brush
-                            </span>
-                        </button>
+                        <div id="projectButtons">
+                            <button class="projectButton edit">
+                                <span class="material-symbols-outlined">
+                                    brush
+                                </span>
+                            </button>
+                            <button class="projectButton delete">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                        </div>
                     </div>
                     <p id="projectDescription"></p>
                     <hr />

@@ -30,7 +30,12 @@
     padding: 0rem 2rem;
 }
 
-.editProject {
+#projectButtons {
+    display: flex;
+    gap: .4rem;
+}
+
+.projectButton {
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
@@ -41,11 +46,15 @@
     padding: 1rem;
 }
 
-.editProject:hover {
+.projectButton:hover {
     cursor: pointer;
     background-color: rgba(0,0,0,0.040);
     border-radius: 0.5rem;
     transition: ease 0.1s;
+}
+
+.projectButton.delete {
+    color: rgba(195, 40, 13, 0.745);
 }
 
 #projectName {
@@ -80,4 +89,12 @@
 svg #emptyImage {
     width: 200px;
     height: 200px;
+}
+
+.foldButton.content {
+    transition: 2s ease; 
+    transform: scaleX(-1);
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
 }

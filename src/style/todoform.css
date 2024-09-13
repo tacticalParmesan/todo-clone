@@ -1,6 +1,6 @@
 dialog{
     opacity: 0;
-    transition: 0.5s ease;
+    transition: .25s ease;
 	transform: scale(0);
     top: 20%;
     justify-self: center;

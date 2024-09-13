@@ -5,50 +5,58 @@ import { TodoForm } from "./todoform";
 import { ProjectForm } from "./projectform";
 import { isToday, format } from "date-fns";
 
-export class Sidebar {
-    constructor() {}
+export const Sidebar = (function() {
 
-    //#region Implementing singleton pattern
-    static getInstance() {
-        if (!Sidebar.instance) {
-            Sidebar.instance = new Sidebar();
-        }
-        return Sidebar.instance;
+    const sidebar = {
+        self:               document.querySelector("#sidebar"),
+        addTodoButton:      document.querySelector("#addTodoButton"),
+        addProjectButton:   document.querySelector("#addProject"),
+        inboxTab:           document.querySelector("#inbox"),
+        todayTab:           document.querySelector("#today"),
+        todayNumber:        document.querySelector("#todoNumber"),
+        projectList:        document.querySelector("#projectList"),
+        foldButton:         document.querySelector(".foldButton"),
+        unfoldButton:       document.querySelector(".foldButton.content")  
     }
-    //#endregion
 
     /**
      * Initalizes the Sidebar, gives the first update to dynamic sidebar
      * elements and activates buttons,
      */
-    static init() {
-        this.toggleTabSelection()
+    function init() {
+        toggleTabSelection()
+        updateTodayTodos();
+        setTimeout(() => sidebar.self.classList.add("foldable"),500);
 
-        const addTodoButton = document.querySelector("#addTodoButton");
-        addTodoButton.onclick = () => TodoForm.openForm();
+        [sidebar.foldButton, sidebar.unfoldButton]
+        .forEach((btn) => btn.onclick = () => foldSidebar())
+        sidebar.unfoldButton.style.display = "none";
+        sidebar.addTodoButton.onclick = () => TodoForm.openForm();
+        sidebar.addProjectButton.onclick = () => ProjectForm.openForm();
 
-        const addProjectButton = document.querySelector("#addProject");
-        addProjectButton.onclick = () => ProjectForm.openForm();
-
-        const inboxTab = document.querySelector("#inbox");
-        inboxTab.classList.toggle("current")
-        inboxTab.onclick = () => {
+        sidebar.inboxTab.classList.toggle("current")
+        sidebar.inboxTab.onclick = () => 
             Gui.switchProject(Store.loadProject("aaa000"));
-        };
 
-        const todayTab = document.querySelector("#today");
-        todayTab.onclick = () => Gui.renderFiltered("dueDate", format(new Date(), "d MMM yyyy"));
-
-
-        this.updateTodayTodos();
+        sidebar.todayTab.onclick = () => 
+            Gui.renderFiltered("dueDate", format(new Date(), "d MMM yyyy"));
     }
 
-    static foldSidebar() {}
+        /**
+     * Closes the sidebar and lets the content area to expand.
+     */
+    function foldSidebar() {
+        sidebar.self.classList.toggle("folded");
+        sidebar.unfoldButton.style.display = (
+            sidebar.unfoldButton.style.display === 'none') 
+            ? 'block' 
+            : 'none';
+    }
 
     /**
      * Updates the number of today todos displayed in the Sidebar.
      */
-    static updateTodayTodos() {
+    function updateTodayTodos() {
         const todayNumber = document.querySelector("#todoNumber");
         const todayTodos = Store.loadAllTodos().filter((todo) =>
             isToday(todo.dueDate)
@@ -60,11 +68,9 @@ export class Sidebar {
      * Clears the Project list in the sidebar panel by wiping
      * todo child elements.
      */
-    static clearProjects() {
-        const projectList = document.querySelector("#projectList");
-
-        while (projectList.firstChild) {
-            projectList.removeChild(projectList.firstChild);
+    function clearProjects() {
+        while (sidebar.projectList.firstChild) {
+            sidebar.projectList.removeChild(projectList.firstChild);
         }
     }
 
@@ -72,10 +78,10 @@ export class Sidebar {
      * Loads clickable projects tab under the porject list in the sidebar.
      * Uses the template from the hidden 'templates' html element.
      */
-    static showProjects() {
-        const projectsList = document.querySelector("#projectList");
+    function showProjects() {
         const template = document.querySelector("#projectTabTemplate");
-        this.clearProjects();
+        
+        clearProjects();
 
         for (const project of Object.keys(localStorage)) {
             if (project === "aaa000") {
@@ -84,8 +90,8 @@ export class Sidebar {
 
             const loaded = Store.loadProject(project)
             const tab = template.cloneNode(true);
+            
             tab.id = project.toLowerCase();
-
             tab.querySelector(".projectName").textContent =
                 Utils.toTitleCase(loaded.name);
             tab.querySelector("span").style.color =
@@ -93,12 +99,15 @@ export class Sidebar {
             tab.onclick = () => {
                 Gui.switchProject(Store.loadProject(project));
             }
-            projectsList.appendChild(tab);
+            sidebar.projectList.appendChild(tab);
         }
-        this.toggleTabSelection()
+        toggleTabSelection()
     }
 
-    static toggleTabSelection() {
+    /**
+     * Enables graphical feedback for tab selection.
+     */
+    function toggleTabSelection() {
         const allSidebarTabs = document.querySelectorAll(".tab")
         allSidebarTabs.forEach((tab) => {
             tab.addEventListener("click", () => {
@@ -107,4 +116,13 @@ export class Sidebar {
             }) 
         })
     }
-}
+
+    /**
+     * Dispatches a click event to the Inbox Tab when needed.
+     */
+    function showInbox() {
+        sidebar.inboxTab.click()
+    }
+
+    return { init, foldSidebar, updateTodayTodos, showProjects, showInbox }
+})();

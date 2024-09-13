@@ -15,7 +15,7 @@ export const ProjectForm = (() => {
         savebtn:       document.querySelector("#saveProject"),
         name:          document.querySelector("#projectFormName"),
         description:   document.querySelector("#projectDesc"),
-        uicolor:         document.querySelector("#projectColor"),
+        uicolor:       document.querySelector("#projectColor"),
         circle:        document.querySelector("#colorCircle")
     };
     

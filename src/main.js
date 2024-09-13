@@ -18,13 +18,13 @@ const Startup = (function () {
     });
 
     document.addEventListener("DOMContentLoaded", ()=>{
-        Sidebar.init()
-        Sidebar.showProjects()
+        Sidebar.init();
+        Sidebar.showProjects();
     })
 
     document.addEventListener("DOMContentLoaded", () => {
-        TodoForm.init()
-        ProjectForm.init()
+        TodoForm.init();
+        ProjectForm.init();
     })
 
     return { general };
