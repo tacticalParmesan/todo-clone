@@ -31,6 +31,8 @@ export const TodoForm = ( () => {
     function init() {
         dialog.form.onsubmit = (e) => e.preventDefault()
         dialog.closebtn.onclick = () => closeForm();
+        dialog.savebtn.disabled = true;
+        dialog.title.oninput = () => preventEmptyTodo();
     }
 
     /**
@@ -252,6 +254,18 @@ export const TodoForm = ( () => {
      */
     function validatePriority(priority) {
         return !priority ? "4" : priority;
+    }
+
+    /**
+     * Prevents creation of untitled todos by disabling the save button if
+     * the user does not provide the title. The rest of values are set by
+     * validation functions.
+     */
+    function preventEmptyTodo() {
+        console.log(dialog.title.value, dialog.title.value !== "");
+        Utils.isValidString("title", dialog.title.value) 
+        ? dialog.savebtn.removeAttribute("disabled")  
+        : dialog.savebtn.setAttribute("disabled", true) 
     }
 
     return {  init, openForm  }

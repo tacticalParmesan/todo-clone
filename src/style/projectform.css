@@ -62,12 +62,20 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
+#saveProjectbody {
+    background-color: rgba(0, 49, 83, 0.25);
+}
+
+#saveProject:disabled:hover {
+    cursor: not-allowed;
+}
+
 #closeProjectForm {
     background-color: rgba(195, 40, 13, 0.745);
     color: rgba(255, 255, 255, 0.85);
 }
 
-#saveProject:hover {
+#saveProject:not([disabled]):hover {
     cursor: pointer;
     background-color: rgba(0, 49, 83, 0.75);
     color: rgba(255, 255, 255, 0.85);

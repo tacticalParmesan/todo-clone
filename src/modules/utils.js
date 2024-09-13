@@ -23,9 +23,10 @@ export class Utils {
         if (/\S/.test(value) && typeof value === "string") {
             return true;
         } else {
-            throw new Error(
+            console.warn(
                 `Value "${value}" is not a valid input for field "${fieldName}".`
             );
+            return false
         }
     }
 

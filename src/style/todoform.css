@@ -103,12 +103,20 @@ dialog[open] {
     color: rgba(255, 255, 255, 0.85);
 }
 
+#saveTodo:disabled {
+    background-color: rgba(0, 49, 83, 0.25);
+}
+
+#saveTodo:disabled:hover {
+    cursor: not-allowed;
+}
+
 #closeForm {
     background-color: rgba(195, 40, 13, 0.745);
     color: rgba(255, 255, 255, 0.85);
 }
 
-#saveTodo:hover:not(.disabled) {
+#saveTodo:not([disabled]):hover {
     cursor: pointer;
     background-color: rgba(0, 49, 83, 0.75);
     color: rgba(255, 255, 255, 0.85);

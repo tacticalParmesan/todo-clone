@@ -3,8 +3,10 @@
     min-width: 240px;
     padding: 0.5rem;
     height: 100%;
-    box-sizing: content-box;
     overflow: hidden;
+    box-sizing: content-box;
+    flex-basis: 0px;
+
 }
 
 #sidebar.foldable {
@@ -12,7 +14,7 @@
 }
 
 #sidebar.folded {
-    padding: 0;
+    padding: 0px;
     min-width: 0px;
     width: 0px;
 }
@@ -21,7 +23,8 @@
 .sidebarPanel {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem
+    gap: 0.25rem;
+    
 }
 
 #sidebar {

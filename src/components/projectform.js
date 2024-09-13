@@ -2,6 +2,7 @@ import { Store } from "../modules/storage";
 import { Sidebar } from "./sidebar"; 
 import { Logic } from "../modules/logic";
 import { Gui } from "../modules/gui";
+import { Utils } from "../modules/utils";
 
 /**
  * Contains functionalities for the dialog and inner form
@@ -26,6 +27,8 @@ export const ProjectForm = (() => {
     function init() {
         dialog.closebtn.onclick = () => closeForm();
         dialog.uicolor.onchange = () => updateColorCircle(dialog.uicolor.value)
+        dialog.savebtn.disabled = true;
+        dialog.name.oninput = () => preventEmptyProject();
     }
     
     /**
@@ -129,6 +132,17 @@ export const ProjectForm = (() => {
     function updateColorCircle(color) {
         dialog.circle.style.backgroundColor = color;
     }
+
+    /**
+     * Prevents creation of unnamed projects by disabling the save button if
+     * the user does not provide the name. The rest of values are set by
+     * validation functions.
+     */
+        function preventEmptyProject() {
+            Utils.isValidString("name", dialog.name.value) 
+            ? dialog.savebtn.removeAttribute("disabled")  
+            : dialog.savebtn.setAttribute("disabled", true) 
+        }
 
     return { init, openForm }
 })();

@@ -4,6 +4,7 @@ import { Sidebar } from "./components/sidebar";
 import { TodoForm } from "./components/todoform";
 import { ProjectForm } from "./components/projectform";
 import "./style/main.css";
+import { Filter } from "./modules/filter";
 
 /**
  * Handles startup of the Todo app by loading event listeners
@@ -25,6 +26,10 @@ const Startup = (function () {
     document.addEventListener("DOMContentLoaded", () => {
         TodoForm.init();
         ProjectForm.init();
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+        Filter.init()
     })
 
     return { general };

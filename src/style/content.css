@@ -6,8 +6,6 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 2rem;
-    /* overflow-y: scroll;  */
-    /* overflow-x: hidden; */
 }
 
 #content-view {
@@ -96,5 +94,12 @@ svg #emptyImage {
     transform: scaleX(-1);
     position: absolute;
     top: 0.75rem;
-    left: 0;
+    left: 0.75rem;
+}
+
+#filterSelectionPanel {
+    display: none;
+    padding: 2rem;
+
+    gap: .5rem
 }
