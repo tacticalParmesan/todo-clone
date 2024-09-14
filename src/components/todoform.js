@@ -20,7 +20,7 @@ export const TodoForm = ( () => {
         priority:       document.querySelector("#formPriority"),
         project:        document.querySelector("#formProject"),
         closebtn:       document.querySelector("#closeForm"),
-        savebtn:        document.querySelector("#saveTodo")
+        savebtn:        document.querySelector("#saveTodo"),
     }
 
     /**
@@ -41,6 +41,7 @@ export const TodoForm = ( () => {
      */
     function openForm(mode="create", todo=null) {
         updateProjectSelection();
+        Gui.toggleOverlay();
         (mode === "edit") ? openForEditing(todo) : openForCreation();
     }
 
@@ -48,7 +49,8 @@ export const TodoForm = ( () => {
      * Closes the Todo form.
      */
     function closeForm() {
-        dialog.modal.close()
+        Gui.toggleOverlay();
+        dialog.modal.close();
         clearForm();
     }
 

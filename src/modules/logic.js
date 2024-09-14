@@ -94,7 +94,7 @@ export class Logic {
     static moveTodo(source, target, todo) {
         const from = Store.loadProject(source);
         const to = Store.loadProject(target);
-        console.log(source, target)
+
         this.deleteTodo(from, todo);
         Store.saveProject(from);
 

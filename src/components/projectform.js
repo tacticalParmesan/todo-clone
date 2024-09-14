@@ -38,6 +38,7 @@ export const ProjectForm = (() => {
      */
     function openForm(mode="create", project=null) {
         dialog.modal.show();
+        Gui.toggleOverlay();
         (mode === "edit") ? openForEditing(project) : openForCreation();
     }
     
@@ -73,6 +74,7 @@ export const ProjectForm = (() => {
      */
     function closeForm() {
         dialog.modal.close();
+        Gui.toggleOverlay();
         resetForm();
     }
 

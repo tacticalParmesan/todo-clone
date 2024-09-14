@@ -30,6 +30,7 @@ export const Gui = (function() {
         emptyPaneltext:         document.querySelector("#emptyProjectText"),
         editProjectButton:      document.querySelector(".edit"),
         deleteProjectButton:    document.querySelector(".delete"),
+        overlay:                document.querySelector("#dialogOverlay")
     }
 
     /**
@@ -204,6 +205,14 @@ export const Gui = (function() {
         checkForEmptyProject();
     };
 
+    /**
+     * Opens an overlay to prevent the user from clicking anything while forms
+     * are open.
+     */
+    function toggleOverlay() {
+        ui.overlay.style.display = ui.overlay.style.display === "block" ? "none" : "block"
+    }
+
     return {
         setCurrentProject,
         getCurrentProject,
@@ -213,6 +222,7 @@ export const Gui = (function() {
         checkForEmptyProject,
         checkIfFiltered,
         clearTodoView,
+        toggleOverlay,   
         update
     }
 })();
