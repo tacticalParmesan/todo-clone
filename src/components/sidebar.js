@@ -4,6 +4,7 @@ import { Utils } from "../modules/utils";
 import { TodoForm } from "./todoform";
 import { ProjectForm } from "./projectform";
 import { isToday, format } from "date-fns";
+import { Filter } from "../modules/filter";
 
 export const Sidebar = (function() {
 
@@ -113,6 +114,7 @@ export const Sidebar = (function() {
             tab.addEventListener("click", () => {
                 allSidebarTabs.forEach(t => t.classList.remove("current"))
                 tab.classList.toggle("current")
+                if (tab.id !== "filters") Filter.hideFilterPanel()
             }) 
         })
     }

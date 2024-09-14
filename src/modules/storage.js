@@ -74,17 +74,4 @@ export class Store {
         if (!check) console.info(`Project does not exist.`);
         return check;
     }
-
-    // static doProjectExistByName(name) {
-    //     for (const project in JSON.parse(localStorage)) {
-    //         console.log(project)
-    //         if (Project.fromJSON(project).name === name) {
-    //             return true
-    //         } else {
-    //             continue
-    //         }
-    //     }
-    //     return false
-
-    // }
 }

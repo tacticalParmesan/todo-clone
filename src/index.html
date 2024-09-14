@@ -45,9 +45,9 @@
                         <p class="panelText">Today</p>
                         <p class="panelText" id="todoNumber">N</p>
                     </div>
-                    <div class="tab" id="upcoming">
-                        <span class="material-symbols-outlined"> tune </span>
-                        <p class="panelText">Filters</p>
+                    <div class="tab" id="filters">
+                        <span class="material-symbols-outlined"> search </span>
+                        <p class="panelText">Search & Filters</p>
                     </div>
                 </section>
                 <section class="sidebarPanel" id="projectPanel">
@@ -89,10 +89,11 @@
                     <div id="filterSelectionPanel">
                         <select name="" id="prop">
                             <option value="" selected disabled>Property</option>
+                            <option value="title">Title</option>
                             <option value="dueDate">Date</option>
                             <option value="priority">Priority</option>
                         </select>
-                        <input type="text" id="value" />
+                        <input type="number" id="value" />
                     </div>
                     <ol id="todoView"></ol>
                     <div id="emptyProjectScreen">

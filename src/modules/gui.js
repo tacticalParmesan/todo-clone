@@ -6,8 +6,11 @@ import Project from "./project";
 import checklist from "../../assets/checklist-71.svg"
 import scrum from "../../assets/scrum-board-27.svg"
 import construction from "../../assets/construction-site-59.svg"
+import notfound from "../../assets/404.svg"
+import resting from "../../assets/resting-49.svg"
 import { ProjectForm } from "../components/projectform";
 import { Logic } from "./logic";
+import { format } from "date-fns";
 
 /**
  * Object that collects references and functions related to the Content Area
@@ -25,6 +28,7 @@ export const Gui = (function() {
         projectName:            document.querySelector("#projectName"),
         projectDesc:            document.querySelector("#projectDescription"),
         emptyPanel:             document.querySelector("#emptyProjectScreen"),
+        emptyPaneltext:         document.querySelector("#emptyProjectText"),
         editProjectButton:      document.querySelector(".edit"),
         deleteProjectButton:    document.querySelector(".delete"),
     }
@@ -33,7 +37,7 @@ export const Gui = (function() {
      * Collection of SVG imports to be displayed in the content panel
      * with the message to create a new project.
      */
-    const svgs = [checklist, scrum, construction]
+    const svgs = [checklist, scrum, construction, notfound, resting]
 
     /**
      * The current project shown in the content area.
@@ -115,17 +119,26 @@ export const Gui = (function() {
      * @param {*} value 
      */
     function renderFiltered(property, value) {
-        const filterName = Utils.toTitleCase(property);
+        const filterName = value === format(new Date(), "d MMM yyyy") 
+        ? "Today" 
+        : "Search and Filters";
+
+        const filterDesc = value === format(new Date(), "d MMM yyyy") 
+        ? "A list of Today's tasks." 
+        : "Filter Todos by desired value."
+
         const filteredTodos = Store.loadAllTodos().filter(
-            (todo) => todo[property] === value
+            (todo) => 
+                todo[property] === value || new RegExp(`(?=...)${value}`, "i").test(todo[property])
         );
 
         const tempProject = new Project(
-            `${filterName}: ${value}`,
-            "Filtered view.",
+            filterName,
+            filterDesc,
             "black",
             [property, value]
         );
+
         filteredTodos.forEach((todo) => tempProject.add(todo));
         switchProject(tempProject);
     };
@@ -136,11 +149,24 @@ export const Gui = (function() {
      */
     function checkForEmptyProject() {
         ui.emptyPanel.removeChild(ui.emptyPanel.firstChild)
-        
-        const svg = insertSvg(svgs[Utils.randMax(0, 2)])
-        ui.emptyPanel.insertBefore(svg, ui.emptyPanel.firstChild) 
-        
+
+        if(!currentProject.filtered) {
+            const svg = insertSvg(svgs[Utils.randMax(0, 2)])
+            ui.emptyPanel.insertBefore(svg, ui.emptyPanel.firstChild) 
+
+        } else if (currentProject.filtered && currentProject.name === "today") {
+            const restSvg = insertSvg(svgs[4])
+            ui.emptyPanel.insertBefore(restSvg, ui.emptyPanel.firstChild) 
+            ui.emptyPaneltext.textContent = "Nothing to do for today. Enjoy some rest!"
+
+        } else {
+            const searchSvg = insertSvg(svgs[3])
+            ui.emptyPanel.insertBefore(searchSvg, ui.emptyPanel.firstChild) 
+            ui.emptyPaneltext.textContent = "Couldn't find anything with given parameters!"
+
+        }
         ui.emptyPanel.style.display = ui.todoView.firstChild ? "none" : "flex"
+
         
     };
 
@@ -189,6 +215,7 @@ export const Gui = (function() {
         renderFiltered,
         checkForEmptyProject,
         checkIfFiltered,
+        clearTodoView,
         update
     }
 })();

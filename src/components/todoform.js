@@ -31,7 +31,6 @@ export const TodoForm = ( () => {
     function init() {
         dialog.form.onsubmit = (e) => e.preventDefault()
         dialog.closebtn.onclick = () => closeForm();
-        dialog.savebtn.disabled = true;
         dialog.title.oninput = () => preventEmptyTodo();
     }
 
@@ -57,6 +56,8 @@ export const TodoForm = ( () => {
      * Opens todo form in creation mode.
      */
     function openForCreation() {
+        preventEmptyTodo();
+
         dialog.project.value = 
             !Gui.getCurrentProject().filtered 
             ? Gui.getCurrentProject().getUid() 
@@ -74,7 +75,6 @@ export const TodoForm = ( () => {
      * Opens todo form in editing mode.
      */
     function openForEditing(todo) {
-
         const propertiesToUpdate = ["title", "description", "priority", "project" ]
         .forEach((property) => dialog[property].value = todo[property])
 
@@ -262,7 +262,6 @@ export const TodoForm = ( () => {
      * validation functions.
      */
     function preventEmptyTodo() {
-        console.log(dialog.title.value, dialog.title.value !== "");
         Utils.isValidString("title", dialog.title.value) 
         ? dialog.savebtn.removeAttribute("disabled")  
         : dialog.savebtn.setAttribute("disabled", true) 
