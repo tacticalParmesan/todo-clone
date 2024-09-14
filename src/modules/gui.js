@@ -153,6 +153,8 @@ export const Gui = (function() {
         if(!currentProject.filtered) {
             const svg = insertSvg(svgs[Utils.randMax(0, 2)])
             ui.emptyPanel.insertBefore(svg, ui.emptyPanel.firstChild) 
+            ui.emptyPaneltext.textContent = "Looks like this project is empty, \n let's start something new!"
+
 
         } else if (currentProject.filtered && currentProject.name === "today") {
             const restSvg = insertSvg(svgs[4])
