@@ -18,7 +18,6 @@ import { format } from "date-fns";
  * smaller components like Todo cards and the Sidebar, in separate entities.
  */
 export const Gui = (function() {
-
     /**
      * Collection of references to UI elements not included
      * in smaller components.
@@ -121,7 +120,7 @@ export const Gui = (function() {
     function renderFiltered(property, value) {
         const filterName = value === format(new Date(), "d MMM yyyy") 
         ? "Today" 
-        : "Search and Filters";
+        : "Search & Filters";
 
         const filterDesc = value === format(new Date(), "d MMM yyyy") 
         ? "A list of Today's tasks." 
@@ -166,8 +165,6 @@ export const Gui = (function() {
 
         }
         ui.emptyPanel.style.display = ui.todoView.firstChild ? "none" : "flex"
-
-        
     };
 
     /**
