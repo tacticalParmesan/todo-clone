@@ -23,26 +23,28 @@ export const Filter = (function() {
         filter.filterTab.onclick = () => showFilterPanel()
 
         filter.selector.onchange = () => {
-            let inputType;
+            filter.value.value = ""
             switch (filter.selector.value) {
                 case "dueDate":
-                    filter.value.setAttribute("type", "date")
+                    filter.value.setAttribute("type", "date");
                     break;
                 case "priority":
-                    filter.value.setAttribute("type", "number")
-                    filter.value.setAttribute("max", 4)
+                    filter.value.setAttribute("type", "number");
+                    filter.value.setAttribute("min", 1);
+                    filter.value.setAttribute("max", 4);
+                    filter.value.value = 1;
                     break
                 case "title":
-                    filter.value.setAttribute("type", "text")
+                    filter.value.setAttribute("type", "search");
                     break
                 default:
-                    filter.value.setAttribute("disabled", "true")
+                    filter.value.setAttribute("disabled", "true");
                     break;
             }
-            Gui.clearTodoView()
-            filter.value.value = ""
+            Gui.clearTodoView();
+
         }
-        filter.value.oninput = () => lookup()
+        filter.value.oninput = () => lookup();
     }
 
     /**

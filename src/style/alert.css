@@ -1,0 +1,34 @@
+#confirmDelete {
+    background-color: rgba(195, 40, 13, 0.745);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#confirmDelete:hover {
+    cursor: pointer;
+    background-color: rgba(195, 40, 13, 0.95);
+}
+
+#closeDeleteAlert:hover {
+    background-color: rgba(191, 196, 199, 0.75);
+    cursor: pointer;
+}
+
+#confirmProjDelete {
+    background-color: rgba(195, 40, 13, 0.745);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#confirmProjDelete:hover {
+    cursor: pointer;
+    background-color: rgba(195, 40, 13, 0.95);
+}
+
+#closeDeleteProjAlert:hover {
+    background-color: rgba(191, 196, 199, 0.75);
+    cursor: pointer;
+}
+
+#deletingTodo,
+#deletingProject {
+    font-weight: bold;
+}

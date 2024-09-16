@@ -57,6 +57,27 @@ export class Card {
         if (elementToEdit) elementToEdit.textContent = newValue;
     }
 
+    static openAlert(todo, todoUI) {
+        const deleteTodoAlert = document.querySelector("#deleteTodoAlert");
+        const cancelButton = document.querySelector("#closeDeleteAlert");
+        const confirmDeleteButton = document.querySelector("#confirmDelete");
+        const title = document.querySelector("#deletingTodo")
+        deleteTodoAlert.show()
+        title.textContent = todo.title
+
+        Gui.toggleOverlay();
+        cancelButton.onclick = () => {
+            deleteTodoAlert.close();
+            Gui.toggleOverlay(); 
+        };
+
+        confirmDeleteButton.onclick = () => {
+            Gui.toggleOverlay();
+            deleteTodoAlert.close();
+            this.deleteTodo(todo, todoUI);
+        };
+    }
+
     /**
      * Deletes a todo from the in-memory list and from the UI view.
      * @param {*} todo
@@ -115,7 +136,7 @@ export class Card {
         editButton.onclick = () => TodoForm.openForm("edit", todo);
 
         const deleteButton = newCard.querySelector(".deleteButton");
-        deleteButton.onclick = () => this.deleteTodo(todo, newCard);
+        deleteButton.onclick = () => this.openAlert(todo, newCard);
 
         Gui.update()
 

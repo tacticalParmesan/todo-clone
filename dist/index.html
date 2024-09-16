@@ -30,7 +30,7 @@
                     </button>
                 </section>
                 <section class="sidebarPanel" id="mainPanel">
-                    <button id="addTodoButton">
+                    <button class="addTodoButton insidebar">
                         <div class="circle">
                             <span class="material-symbols-outlined"> add </span>
                         </div>
@@ -85,6 +85,10 @@
                         </div>
                     </div>
                     <p id="projectDescription"></p>
+                    <button class="addTodoButton incontentview">
+                        <span class="material-symbols-outlined"> add </span>
+                        <p>New task</p>
+                    </button>
                     <hr />
                     <div id="filterSelectionPanel">
                         <select name="" id="prop">
@@ -93,7 +97,7 @@
                             <option value="dueDate">Date</option>
                             <option value="priority">Priority</option>
                         </select>
-                        <input type="number" id="value" />
+                        <input type="search" id="value"/>
                     </div>
                     <ol id="todoView"></ol>
                     <div id="emptyProjectScreen">
@@ -198,15 +202,40 @@
                 </div>
             </dialog>
             <!-- #endregion -->
+            <!-- #region Delete Todo Alert -->
+         <dialog id="deleteTodoAlert">
+            <h2>Do you really want to delete this Task?</h2>
+            <p>The task <span id="deletingTodo"> Todo Title </span> will be deleted permanently.</p>
+            <hr>
+            <div id="lowerPanel">
+                <button id="closeDeleteAlert">Close</button>
+                <button id="confirmDelete">Delete todo</button>
+            </div>
+         </dialog>
+         <!-- #endregion -->
+            <!-- #region Delete Project Alert -->
+         <dialog id="deleteProjectAlert">
+            <h2>Do you really want to delete this Project?</h2>
+            <p>The task <span id="deletingProject"> Project Name </span> will be deleted permanently.</p>
+            <hr>
+            <div id="lowerPanel">
+                <button id="closeDeleteProjAlert">Close</button>
+                <button id="confirmProjDelete">Delete todo</button>
+            </div>
+         </dialog>
+        <!-- #endregion -->
         </main>
         <!-- #region Templates -->
         <!-- Templates for componenets -->
         <div id="templates" style="display: none">
             <li class="todoTemplate" uid="">
-                <input type="checkbox" class="doneCheck" />
-                <div class="todoInfoTab">
-                    <h2 class="todoTitle" prop="title">Title</h2>
-                    <p class="todoDesc" prop="description">Description</p>
+                <div class="leftTab">
+
+                    <input type="checkbox" class="doneCheck" />
+                    <div class="todoInfoTab">
+                        <h2 class="todoTitle" prop="title">Title</h2>
+                        <p class="todoDesc" prop="description">Description</p>
+                    </div>
                 </div>
                 <div class="rightTab">
                     <div class="buttonsTab">

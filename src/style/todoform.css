@@ -86,6 +86,13 @@ dialog[open]::backdrop {
     color: rgba(0, 0, 0, 0.50);
 }
 
+#formProject {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
 #todoForm hr {
     border: none;
     margin-top: 0.4rem;

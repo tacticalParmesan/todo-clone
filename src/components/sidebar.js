@@ -10,7 +10,7 @@ export const Sidebar = (function() {
 
     const sidebar = {
         self:               document.querySelector("#sidebar"),
-        addTodoButton:      document.querySelector("#addTodoButton"),
+        addTodoButton:      document.querySelector(".addTodoButton"),
         addProjectButton:   document.querySelector("#addProject"),
         inboxTab:           document.querySelector("#inbox"),
         todayTab:           document.querySelector("#today"),

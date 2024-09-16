@@ -2,15 +2,16 @@ import { Utils } from "./utils";
 import { Store } from "./storage";
 import { Card } from "../components/card";
 import { Sidebar } from "../components/sidebar";
+import { ProjectForm } from "../components/projectform";
+import { Logic } from "./logic";
+import { format } from "date-fns";
 import Project from "./project";
 import checklist from "../../assets/checklist-71.svg"
 import scrum from "../../assets/scrum-board-27.svg"
 import construction from "../../assets/construction-site-59.svg"
 import notfound from "../../assets/404.svg"
 import resting from "../../assets/resting-49.svg"
-import { ProjectForm } from "../components/projectform";
-import { Logic } from "./logic";
-import { format } from "date-fns";
+import { TodoForm } from "../components/todoform";
 
 /**
  * Object that collects references and functions related to the Content Area
@@ -30,7 +31,8 @@ export const Gui = (function() {
         emptyPaneltext:         document.querySelector("#emptyProjectText"),
         editProjectButton:      document.querySelector(".edit"),
         deleteProjectButton:    document.querySelector(".delete"),
-        overlay:                document.querySelector("#dialogOverlay")
+        overlay:                document.querySelector("#dialogOverlay"),
+        addTodoButton:          document.querySelector("#content-view .addTodoButton")
     }
 
     /**
@@ -83,21 +85,27 @@ export const Gui = (function() {
     function renderProject(project) {
         clearTodoView();
         ui.projectName.textContent = Utils.toTitleCase(project.name);
-        ui.projectDesc.textContent = project.description
+        ui.projectDesc.textContent = project.description;
 
         for (const todo of project.getTodosList()) {
             todoView.appendChild(Card.createCard(todo));
         }
 
         if (project.getUid() === "aaa000" || project.filtered) {
-            ui.editProjectButton.style.display = "none"
-            ui.deleteProjectButton.style.display = "none"
-
+            ui.editProjectButton.style.display = "none";
+            ui.deleteProjectButton.style.display = "none";
         } else {
             ui.editProjectButton.style.display = "flex"
             ui.deleteProjectButton.style.display = "flex"
             ui.editProjectButton.onclick = () => ProjectForm.openForm("edit", project)
-            ui.deleteProjectButton.onclick = () => deleteProject(project)
+            ui.deleteProjectButton.onclick = () => openDeleteAlert(project)
+        }
+
+        if (project.filtered && project.name !== "today") {
+            ui.addTodoButton.style.display = "none";
+        } else {
+            ui.addTodoButton.style.display = "flex";
+            ui.addTodoButton.onclick = () => TodoForm.openForm();
         }
     };
 
@@ -145,7 +153,7 @@ export const Gui = (function() {
 
     /**
      * Checks if the currently displayed project is empty and shows
-     * call to action graphics if this is the case.
+     * call to action graphics if this is the case.Search
      */
     function checkForEmptyProject() {
         ui.emptyPanel.removeChild(ui.emptyPanel.firstChild)
@@ -213,6 +221,27 @@ export const Gui = (function() {
      */
     function toggleOverlay() {
         ui.overlay.style.display = ui.overlay.style.display === "block" ? "none" : "block"
+    }
+
+    function openDeleteAlert(project) {
+        const deleteAlert = document.querySelector("#deleteProjectAlert");
+        const cancelButton = document.querySelector("#closeDeleteProjAlert");
+        const confirmDeleteButton = document.querySelector("#confirmProjDelete");
+        const name = document.querySelector("#deletingProject")
+        deleteAlert.show()
+        name.textContent = project.name
+
+        Gui.toggleOverlay();
+        cancelButton.onclick = () => {
+            deleteAlert.close();
+            Gui.toggleOverlay(); 
+        };
+
+        confirmDeleteButton.onclick = () => {
+            Gui.toggleOverlay();
+            deleteAlert.close();
+            deleteProject(project)
+        };
     }
 
     return {

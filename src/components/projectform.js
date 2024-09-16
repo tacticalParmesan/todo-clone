@@ -54,9 +54,9 @@ export const ProjectForm = (() => {
      * @param {*} project 
      */
     function openForEditing(project) {
-
         const propertiesToUpdate = ["name", "description", "uicolor" ]
         .forEach((property) => dialog[property].value = project[property])
+        preventEmptyProject();
         updateColorCircle(project.uicolor)
 
         dialog.savebtn.textContent = "Save changes";

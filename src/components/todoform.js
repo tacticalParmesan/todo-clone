@@ -121,8 +121,6 @@ export const TodoForm = ( () => {
             Gui.renderProject(Gui.getCurrentProject());
         }
 
-        console.log(Gui.getCurrentProject(), todoProperties)
-
         Gui.update()
         Gui.checkIfFiltered()
     }

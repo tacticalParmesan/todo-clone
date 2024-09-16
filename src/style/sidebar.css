@@ -37,7 +37,7 @@
 
 #userInfo:hover,
 .foldButton:hover,
-#addTodoButton:hover,
+.addTodoButton:hover,
 #addProject:hover,
 .tab:hover,
 .options:hover {
@@ -100,7 +100,7 @@
     color: rgba(0, 49, 83, 0.9);
 }
 
-#addTodoButton {
+button.addTodoButton {
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -122,12 +122,12 @@
     align-items: center;
 }
 
-#addTodoButton span {
+button.addTodoButton span {
     text-align: center;
     font-weight: none;
 }
 
-#addTodoButton p {
+#sidebar button.addTodoButton p {
     color: rgba(0, 49, 83, 0.75);
 }
 

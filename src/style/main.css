@@ -5,6 +5,7 @@
 @import "todoform.css";
 @import "projectform.css";
 @import "mobile.css";
+@import "alert.css";
 
 /*#region CSS Reset */
 :root {
