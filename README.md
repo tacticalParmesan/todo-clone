@@ -116,9 +116,9 @@ store in local storage under the project UID as key value.
 ### 3.2 | Known issues and Optimization
 <p align="justify">
 Lets address the elephant in th room: the site is not responsive at this moment. This may change in the near future after a deep dive into responsive web design. Changes to apply would probably be the following:
-<p align="justify">
+
 * Replace the sidebar with a bottom navbar when on small screen.
-* Show the contet view in the upper part of the screen and with column orientation.
+* Show the content view in the upper part of the screen and with column orientation.
 <p align="justify">
 There is also the fact that since the app uses localStorage not only data is persistent only inside a single browser but since localStorage works in the same way as JSON storage, the app is forced to load an entire project 
 when it need to access even its name or just a single todo. Same thing applies to saving and editing data. Once a real backend is wired to the app this problem would be easily solved.
