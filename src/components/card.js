@@ -138,8 +138,7 @@ export class Card {
         const deleteButton = newCard.querySelector(".deleteButton");
         deleteButton.onclick = () => this.openAlert(todo, newCard);
 
-        Gui.update()
-
+        Gui.update() 
         return newCard;
     }
 }

@@ -73,6 +73,7 @@ export const Gui = (function() {
     function deleteProject(project) {
         Logic.deleteProject(project.getUid());
         Gui.update();
+        Sidebar.showProjects();
         Sidebar.showInbox();
     }
 
@@ -211,8 +212,8 @@ export const Gui = (function() {
      */
     function update() {
         Sidebar.updateTodayTodos();
-        Sidebar.showProjects();
         checkForEmptyProject();
+        
     };
 
     /**

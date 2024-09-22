@@ -49,6 +49,6 @@ module.exports = {
     target: "web",
     watchOptions: {
         ignored: /node_modules/, // Exclude node_modules directory from watching
-        poll: 1000, // Check for changes every 1000 milliseconds (1 second)
+        poll: true, // Check for changes every 1000 milliseconds (1 second)
     },
-}
+} 
