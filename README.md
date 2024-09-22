@@ -125,5 +125,5 @@ when it need to access even its name or just a single todo. Same thing applies t
 
 ### 4 | Closing words
 <p align="justify">
-Even though the project is largerly finished It has been a fun little adventure and it would be a shame leaving here wihout updating it, so since it is open source everybody can modify it and if anoyone wants to collabrate, as a solo dev I would be immensely happy!
+Even though the project is largely finished It has been a fun little adventure and it would be a shame leaving here wihout updating it, so since it is open source everybody can modify it and if anyone wants to collaborate, as a solo dev I would be immensely happy!
 I will go back to this myself once I grasped more advanced concepts of Web Development but until then every feedback and suggestion is much much appreciated.
